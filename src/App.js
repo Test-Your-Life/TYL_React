@@ -1,24 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import MenuBar from './MenuBar';
+import { BrowserRouter } from 'react-router-dom'; // 이거를 왜 다른데에 놓으면 에러가 나올까.
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div>
+        <MenuBar />
+      </div>
+    </BrowserRouter>
   );
 }
 
