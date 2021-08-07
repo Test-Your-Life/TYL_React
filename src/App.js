@@ -1,5 +1,5 @@
 import './App.css';
-import MenuBar from './MenuBar';
+import MenuBar from './components/navigation/MenuBar';
 import { BrowserRouter } from 'react-router-dom';
 
 function App() {

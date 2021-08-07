@@ -1,7 +1,7 @@
 import { Route, Link } from 'react-router-dom';
-import Home from './Home';
-import Investment from './Investment';
-import Ranking from './Ranking';
+import Home from '../home/index';
+import Investment from '../investment/index';
+import Ranking from '../ranking/index';
 
 // https://velog.io/@pkbird/React-Router-1
 
