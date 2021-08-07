@@ -1,6 +1,6 @@
 import './App.css';
 import MenuBar from './MenuBar';
-import { BrowserRouter } from 'react-router-dom'; // 이거를 왜 다른데에 놓으면 에러가 나올까.
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
