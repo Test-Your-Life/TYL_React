@@ -1,14 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
-import GoogleButton from './components/auth/GoogleButton';
+import './styles/sass/main.css';
+import Page from './components/navigation/Page';
+import { BrowserRouter } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <GoogleButton />
-      </header>
+    <div className="container">
+      <BrowserRouter>
+        <Page />
+      </BrowserRouter>
     </div>
   );
 }
