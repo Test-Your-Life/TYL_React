@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import FrameList from '../presentational/RankList';
+import React from 'react';
+import RankList from '../presentational/RankList';
 import '../../../styles/sass/main.css';
 
-const Box = () => {
+const AssetRank = () => {
   const people = {
     peopleList: [
       { rank: '1위', nk_name: 'KIM', asset: '400,000,000틸' },
@@ -15,7 +15,7 @@ const Box = () => {
   };
   const { peopleList } = people;
 
-  return <FrameList info={peopleList} />;
+  return <RankList info={peopleList} />;
 };
 
-export default Box;
+export default AssetRank;
