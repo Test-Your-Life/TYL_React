@@ -3,45 +3,51 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 import dotenv from 'dotenv';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from './userSlice';
 dotenv.config();
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
-axios.defaults.baseURL = 'http://192.168.45.48:80';
-// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = process.env.REACT_APP_HOST;
 
-export default function googleButton({ onSocial }) {
+export default function googleButton() {
+  const dispatch = useDispatch();
+
   const handleLogin = async data => {
     const {
-      googleId,
       profileObj: { email, name },
     } = data;
-
-    const body = JSON.stringify({ token: data.tokenId });
+    const body = JSON.stringify({
+      email: email,
+      name: name,
+    });
     const headers = {
       'Content-Type': 'application/json',
     };
+
     axios
       .post('/login', body, { headers })
       .then(response => {
-        // const { accessToken } = response.data;
-        // console.log(accessToken);
-        // axios.defaults.headers.common[
-        //   'Authorization'
-        // ] = `Bearer ${accessToken}`;
-        console.log('123');
+        console.log(response.data);
+        const hasSignedUp = true;
+        const userData = {
+          nickname: '틸틸',
+          email: 'ptsaturn68@daum.net',
+          profileImage: '/src/img/temp.png',
+        };
+
+        if (!hasSignedUp) {
+          // 회원가입 로직
+        } else {
+          // 로그인 로직
+          dispatch(login(userData));
+          window.sessionStorage.setItem('isLogin', 'Y');
+          window.location.href = '/';
+        }
       })
       .catch(error => {
         console.log(error);
       });
-  };
-
-  const onSuccess = async response => {
-    const {
-      googleId,
-      profileObj: { email, name },
-    } = response;
-
-    console.log(`아이디값 : ${googleId} 이메일 : ${email} 이름 : ${name}`);
   };
 
   const onFailure = error => {
@@ -55,6 +61,7 @@ export default function googleButton({ onSocial }) {
         responseType={'id_token'}
         onSuccess={handleLogin}
         onFailure={onFailure}
+        buttonText="구글로 로그인하기"
         cookiePolicy={'single_host_origin'}
       />
     </div>
