@@ -1,4 +1,3 @@
-import './App.css';
 import './styles/sass/main.css';
 import Pc from './components/navigation/Page';
 import Tablet from './components/navigation/Tablet.js';
