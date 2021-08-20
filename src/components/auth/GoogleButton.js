@@ -3,8 +3,9 @@ import React from 'react';
 import GoogleLogin from 'react-google-login';
 import dotenv from 'dotenv';
 import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from './userSlice';
+import { onLoginSuccess, onSilentRefresh } from './auth';
 dotenv.config();
 
 const clientId = process.env.REACT_APP_GOOGLE_CLIENT_KEY;
@@ -26,28 +27,10 @@ export default function googleButton() {
     };
 
     axios
-      .post('/login', body, { headers })
-      .then(response => {
-        console.log(response.data);
-        const hasSignedUp = true;
-        const userData = {
-          nickname: '틸틸',
-          email: 'ptsaturn68@daum.net',
-          profileImage: '/src/img/temp.png',
-        };
-
-        if (!hasSignedUp) {
-          // 회원가입 로직
-        } else {
-          // 로그인 로직
-          dispatch(login(userData));
-          window.sessionStorage.setItem('isLogin', 'Y');
-          window.location.href = '/';
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      .post('/auth/login', body, { headers })
+      .then(onLoginSuccess)
+      .then(user => dispatch(login(user)))
+      .catch(onFailure);
   };
 
   const onFailure = error => {
@@ -62,7 +45,7 @@ export default function googleButton() {
         onSuccess={handleLogin}
         onFailure={onFailure}
         buttonText="구글로 로그인하기"
-        cookiePolicy={'single_host_origin'}
+        // cookiePolicy={'single_host_origin'}
       />
     </div>
   );

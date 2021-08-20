@@ -7,6 +7,7 @@ import { Route, Link } from 'react-router-dom';
 import Modal from './Modal.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../auth/userSlice';
+import axios from 'axios';
 
 const Tabs = ({ url }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,10 +19,12 @@ const Tabs = ({ url }) => {
   };
 
   const onLogout = () => {
-    dispatch(logout());
-    window.sessionStorage.setItem('isLogin', 'N');
+    axios.post('/auth/logout', null).then(() => {
+      dispatch(logout());
+      axios.defaults.headers.common['Authorization'] = '';
+      window.location.href = '/';
+    });
     setModalOpen(false);
-    window.location.href = '/';
   };
 
   const openModal = e => {

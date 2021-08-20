@@ -8,14 +8,15 @@ import Profile from '../profile/index.js';
 import Auth from '../auth/index.js';
 import '../../styles/sass/main.css';
 import { useSelector } from 'react-redux';
-import { checkValidity } from '../auth/userSlice';
+import { checkValidity, selectUser } from '../auth/userSlice';
 
 const Page = () => {
   const validity = useSelector(checkValidity);
+  const user = useSelector(selectUser);
   const [bottomMenuBox, setBottomMenuBox] = useState([]);
 
   useEffect(() => {
-    if (window.sessionStorage.getItem('isLogin') === 'Y') {
+    if (validity) {
       setBottomMenuBox([
         { link: '/Asset', title: '내 자산' },
         { link: '/Profile', title: '내 정보' },
@@ -49,6 +50,7 @@ const Page = () => {
     <div className="page">
       <div className="menu-bar">
         <h2>LOGO</h2>
+        <h4>{user}</h4>
         <ul className="tabs">{topMenuList}</ul>
         <ul className="tabs">{bottomMenuList}</ul>
       </div>

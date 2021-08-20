@@ -10,9 +10,9 @@ export const userSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      state.nickname = action.nickname;
-      state.email = action.email;
-      state.profileImage = action.profileImage;
+      state.nickname = action.payload.nickname;
+      state.email = action.payload.email;
+      state.profileImage = action.payload.profileImage;
       state.isLogin = true;
     },
     logout: state => {
@@ -26,4 +26,5 @@ export const userSlice = createSlice({
 
 export const { login, logout } = userSlice.actions;
 export const checkValidity = state => state.user.isLogin;
+export const selectUser = state => state.user.nickname;
 export default userSlice.reducer;
