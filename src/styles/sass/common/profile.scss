@@ -1,0 +1,38 @@
+.profile-info{
+    width: 100%;
+    padding-top: 15%;
+}
+
+.profile-tabs {
+    width: 80%;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.info{
+    display: flex;
+    width: 100%;
+    padding-left: 24%;
+    font-size: larger;
+    text-align: left;
+}
+
+ul#profile-menu li{
+    border-bottom: 1px solid #c4c4c4;
+    color: $font-color
+}
+
+ul#profile-menu li a:hover{
+    cursor: auto;
+    font-weight:normal;
+    text-decoration: none;
+    color: $font-color;
+}
+
+.profile-img-box-large{
+    width: 60px;
+    height: 60px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
