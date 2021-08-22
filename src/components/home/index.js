@@ -8,7 +8,7 @@ const index = () => {
     <>
       <ul className="home-best">
         <h5>전날 엄청난 수익율을 낸 틸러입니다!</h5>
-        {/* <BestRank /> */}
+        <BestRank />
       </ul>
       <ul className="home-best">
         <h5>전날 아쉬웠던 틸러입니다...</h5>

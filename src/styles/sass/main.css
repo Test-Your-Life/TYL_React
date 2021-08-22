@@ -286,6 +286,56 @@ ul.frameList {
   padding: 8px;
 }
 
+.rolling-box {
+  display: inline-flex;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  border: 1px solid #848484;
+}
+
+ul.rolling-box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+ul.li.rolling-box {
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+  position: absolute;
+  transition: top 0.75s;
+  top: 100%;
+  z-index: 1;
+  background-color: #ffffff;
+}
+
+.card-sliding {
+  top: 0 !important;
+  z-index: 100 !important;
+}
+
+.card-sliding-after {
+  top: -100% !important;
+  z-index: 10 !important;
+}
+
+ul.li.p.rolling-box {
+  font-size: 30px;
+  line-height: 10px;
+  font-weight: bold;
+}
+
+.befor-slide {
+  transform: translateY(100%);
+}
+
+.after-slide {
+  transform: translateY(0);
+}
+
 .gold {
   color: #DCC605;
 }
