@@ -2,8 +2,13 @@ import React from 'react';
 import '../../../styles/sass/main.css';
 import RollingList from '../presentational/RollingList';
 import Ex from '../presentational/Ex';
+import axios from 'axios';
 
 const BestRank = () => {
+  // https://testyourlife.kro.kr/preday-history
+  axios.get('rank/preday-history').then(res => {
+    console.log(res.data);
+  });
   const peopleRank = [
     { rank: '1위', nk_name: '나는야개미', profit: '28.3%' },
     { rank: '2위', nk_name: '주식부자', profit: '26.1%' },
