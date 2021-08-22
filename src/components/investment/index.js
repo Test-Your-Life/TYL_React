@@ -1,10 +1,11 @@
 import React from 'react';
-
+import Category from './components/Category.js';
 const index = () => {
     return (
-        <div>
+        <>
             <h1>Investment 페이지 입니다</h1>
-        </div>
+            <Category></Category>
+        </>
     );
 };
 
