@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RankList from '../presentational/RankList';
-import '../../../styles/sass/main.css';
 import axios from 'axios';
+import '../../../styles/sass/main.css';
 
 const AssetRank = () => {
   const [rank, setRank] = useState([]);
@@ -13,7 +13,7 @@ const AssetRank = () => {
     });
   }, []);
 
-  console.log('>>',rank)
+  // console.log('>>', rank);
 
   const peopleList = [
     { rank: '1위', nk_name: 'KIM', asset: '400,000,000틸' },
