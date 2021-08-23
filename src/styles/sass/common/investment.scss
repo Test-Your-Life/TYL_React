@@ -1,4 +1,4 @@
-.category-container {
+div.category-container, .itemlist-container{
   width: 80%;
   box-sizing: border-box;
   padding: 3%;
@@ -7,7 +7,11 @@
   border: 1px solid #c4c4c4;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px -1px 1px 6px rgba(0, 0, 0, 0.02);
-  text-align: center;
+}
+
+.itemlist-container{
+  display: flex;
+  flex-direction: column;
 }
 
 #category-ul {
@@ -24,4 +28,8 @@
     font-weight: bold;
     color: rgb(70, 77, 82);
 
+}
+
+#itemlist-searchform {
+  float: right;
 }

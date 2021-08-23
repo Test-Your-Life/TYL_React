@@ -449,7 +449,7 @@ ul.frameList {
   color: #8F5600;
 }
 
-.category-container {
+div.category-container, .itemlist-container {
   width: 80%;
   box-sizing: border-box;
   padding: 3%;
@@ -458,7 +458,11 @@ ul.frameList {
   border: 1px solid #c4c4c4;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px -1px 1px 6px rgba(0, 0, 0, 0.02);
-  text-align: center;
+}
+
+.itemlist-container {
+  display: flex;
+  flex-direction: column;
 }
 
 #category-ul {
@@ -473,6 +477,10 @@ ul.frameList {
   padding: 0 16px;
   font-weight: bold;
   color: #464d52;
+}
+
+#itemlist-searchform {
+  float: right;
 }
 
 .container {
