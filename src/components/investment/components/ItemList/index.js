@@ -3,9 +3,8 @@ import ItemStorage from './ItemStorage.js';
 
 const ItemList = () => {
 
-    const ItemStorage = ItemStorage;
 
-
+    const [value, setValue] = React.useState("");
     const inputRef = React.useRef();
 
     const onSubmit = (e) => {
@@ -18,39 +17,17 @@ const ItemList = () => {
 
 
     const SearchForm = (
-        <form id="itemlist-searchform" onSubmit={onSubmit}>
-            <input ref={inputRef} type="text" value={value} placeholder="Search.." autoFocus onChange={onChangeInput} />
-        </form>
+        <div>
+            <form id="itemlist-searchform" onSubmit={onSubmit}>
+                <input ref={inputRef} type="text" value={value} placeholder="Search.." autoFocus onChange={onChangeInput} />
+            </form>
+        </div>
     );
-
-    const Items = (
-        <>
-            {
-                datas.map((data, index) => {
-                    <li>{data.name} 시발</li>;
-                })
-            }
-        </>
-    );
-
-
-    // const Items = (
-    //     value.length > 0 ?
-    //         <ul className="result">
-    //             {datas.map((data, index) => { <li>시발22{index}</li> })
-    //             }
-    //             <p>시발</p>
-    //         </ul>
-    //         :
-    //         <div className="empty-box">검색결과가 없습니다</div>
-    // );
 
     return (
         <div className="itemlist-container">
             {SearchForm}
-            {datas.map((data) => <li>{data.name}</li>)}
-            {Items}
-            <p>시발</p>
+            <ItemStorage></ItemStorage>
 
         </div >
     );
