@@ -12,7 +12,7 @@ const Chart = () => {
             name: "삼성전자",
             data: [
                 {
-                    x: new Date(1538866800000),
+                    x: new Date(1538866800000),// 어떤식으로 데이터가 들어오는지 보고 레이블 수정하자.
                     y: [6591.97, 6596.07, 6585, 6588.39]
                 },
                 {
@@ -61,35 +61,44 @@ const Chart = () => {
 
 
     const [options, setOptions] = React.useState({
+
+
+
+        title: {
+            text: "삼성전자",
+        },
+
         chart: {
         },
+
         xaxis: {
-            type: "category"
-            //tickPlacement: 'between',
+
+            type: 'category',
+
+            labels: {
+                format: 'MM yyyy'
+            },
+
+
+            axisBorder: {
+                show: true,
+                color: "#FF0000",
+            },
+
         },
+
         yaxis: {
             legend: {
                 title: "dan"
             }
         },
+
+        // 툴팁 옵션
         tooltip: {
-            custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-                return (
-                    '<div class="arrow_box">' +
-                    "<span>" +
-                    //the whole series is offered as a prop
-                    //plus the relevant series in the data if there are more than one
-                    //plus the index of where this sits on the x axis
-                    //plus a global object w to extract other chart data.
-                    //apexcharts.js/src/modules/settings/Globals.js
-                    //usw W for better access rather than series[seriesindex][datapointindex]
-                    JSON.stringify(w.globals.categoryLabels[dataPointIndex]) +
-                    "</span>" +
-                    "</div>"
-                );
-            }
         },
-        plotOptions: { // 색깔 옵션
+
+        // 색깔 옵션
+        plotOptions: {
             candlestick: {
                 colors: {
                     upward: '#FF0000',
@@ -103,13 +112,12 @@ const Chart = () => {
     });
 
     return (
-        <div className="itemlist-container">
-            되냐?
+        <div className="chart-container">
             <ReactApexChart
                 options={options}
                 series={series}
                 type="candlestick"
-                height={350}
+                height={400}
             />
         </div >
     );

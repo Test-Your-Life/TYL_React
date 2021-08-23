@@ -1,4 +1,4 @@
-div.category-container, .itemlist-container {
+div.category-container, .itemlist-container, .chart-container, .prediction-container {
   width: 80%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -95,6 +95,83 @@ div#item-changedprice, #item-changedpercent {
 img.item {
   width: 100%;
   height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+div.prediction-item-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-weight: bold;
+}
+
+div#prediction-top-text {
+  font-weight: bold;
+  color: #6C6FC6;
+  padding-bottom: 7px;
+}
+
+div#prediction-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 10px auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+div#prediction-item-name {
+  color: #464d52;
+}
+
+div#prediction-item-valuePercent {
+  background-color: #C4C4C4;
+  color: #EB5374;
+  margin: 10px;
+  border: 1px;
+  border-radius: 3px 3px 3px 3px;
+}
+
+div.trade-container {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+div.trade-item {
+  margin: auto;
+  padding: 16px 70px;
+  border-radius: 10px 10px 10px 10px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+div#trade-purchase {
+  background-color: #3c52e2;
+  color: #e3e3ec;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+div#trade-sell {
+  background-color: #7181e9;
+  color: #e3e3ec;
+  overflow: hidden;
   -o-object-fit: cover;
      object-fit: cover;
 }
