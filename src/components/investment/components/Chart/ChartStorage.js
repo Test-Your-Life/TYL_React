@@ -1,7 +1,6 @@
 import React from "react";
 
-const Chart = () => {
-
+const ChartStorage = () => {
 
 
     return (
@@ -11,4 +10,4 @@ const Chart = () => {
 };
 
 
-export default Chart;
+export default ChartStorage;
