@@ -3,14 +3,31 @@
 ul.home-best {
   display: inline-block;
   border: 1px solid #c4c4c4;
-  padding: 10px;
-  //margin-top: 20px;
-  //margin: 20px auto;
+  padding: 8px;
   width: 70%;
   background-color: #fff;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px -1px 1px 6px rgba(0, 0, 0, 0.02);
-  }
+}
+
+.profit-text-box{
+  padding: 0;
+  width: 100%;
+  margin: 0 0 10px 0;
+}
+
+.profit-text {
+  font-weight: normal;
+  font-size: medium;
+  font-family:'Courier New', Courier, monospace;
+}
+
+.etc-text {
+  width: 97%;
+  font-weight: lighter;
+  font-size: xx-small;
+  text-align: right;
+}
 
 ul.homeRank {
   display: inline-block;
@@ -34,30 +51,59 @@ ul.frameList {
   padding: 8px;
 }
 
-.rolling-box {
-  display: inline-flex;
-  width: 200px;
-  height: 50px;
-  text-align: center;
-  border: 1px solid #848484;
-} 
-
-ul.rolling-box {
+.flexContainer {
+  display: flex;
+  justify-content: space-around;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
+  height: 40px;
 }
 
-ul.li.rolling-box {
+.tickerWrapper {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.best-ticker-text-name {
   width: 100%;
-  height: 100%;
-  transition: .5s;
-  position: absolute;
-  transition: top .75s;
-  top: 100%;
-  z-index: 1;
-  background-color: #ffffff;
+  font-weight: bolder;
+  margin-top: auto; 
+  margin-bottom: auto;
+  animation: motion 0.5s;
+}
+
+.best-ticker-text-profit {
+  width: 100%;
+  font-weight: bolder;
+  margin-top: auto; 
+  margin-bottom: auto;
+  color: $increasedrate;
+  animation: motion 0.5s;
+}
+
+.worst-ticker-text-name {
+  width: 100%;
+  font-weight: bolder;
+  margin-top: auto; 
+  margin-bottom: auto;
+  color: transparent; 
+  text-shadow: 0 0 5px #000; 
+  transition: all 10ms ease-in; 
+  animation: motion 0.5s;
+}
+
+.worst-ticker-text-profit {
+  width: 100%;
+  font-weight: bolder;
+  margin-top: auto; 
+  margin-bottom: auto;
+  color: $decreasedrate;
+  animation: motion 0.5s;
+}
+
+@keyframes motion {
+	0% {padding-top: 20px;}
+	//100% {margin-top: 20px;}
 }
 
 .gold {
@@ -70,26 +116,4 @@ ul.li.rolling-box {
 
 .bronze {
   color: $bronze;
-}
-
-.hello {
-  width: 100%;
-  padding-top: 150px;
-  padding-bottom: 150px;
-}
-
-ul.nt-title{
-  list-style: none;
-}
-
-li.nt-title{
-  list-style: none;
-}
-
-li.div.nt-title {
-  font-size: 28px;
-  color: #4e4e4e;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

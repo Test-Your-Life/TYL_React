@@ -1,23 +1,29 @@
 import React from 'react';
-import GoogleButton from '../auth/GoogleButton';
 import AssetRank from './container/AssetRank';
 import BestRank from './container/BestRank';
+import WorstRank from './container/WorstRank';
 
 const index = () => {
   return (
     <>
       <ul className="home-best">
-        <h5>전날 엄청난 수익율을 낸 틸러입니다!</h5>
+        <ul className="profit-text-box">
+          <div className="etc-text">8/23(전일대비)</div>
+          <div className="profit-text">Best TYL Player</div>
+        </ul>
         <BestRank />
       </ul>
       <ul className="home-best">
-        <h5>전날 아쉬웠던 틸러입니다...</h5>
+        <ul className="profit-text-box">
+          <div className="etc-text">8/23(전일대비)</div>
+          <div className="profit-text">Worst TYL Player</div>
+        </ul>
+        <WorstRank />
       </ul>
       <ul className="homeRank">
         <h5>틸러들의 자산 순위</h5>
         <AssetRank />
       </ul>
-      <GoogleButton />
     </>
   );
 };
