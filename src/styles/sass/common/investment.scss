@@ -26,7 +26,15 @@ div.category-container, .itemlist-container, .chart-container, .prediction-conta
   
 }
 
-#category-li {
+.selected-li {
+  display:inline;
+  padding:0 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #6C6FC6;
+}
+
+.unSelected-li {
     display:inline;
     padding:0 16px;
     font-weight: bold;
@@ -78,9 +86,9 @@ div#item-changed {
   font-size:medium;
 }
 
-div#item-changedprice, #item-changedpercent {
-  color: $increasedrate;
-}
+// div#item-changedprice, #item-changedpercent {
+//   color: $increasedrate;
+// }
 
 img.item {
   width: 100%;

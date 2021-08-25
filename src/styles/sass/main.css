@@ -472,7 +472,15 @@ div.category-container, .itemlist-container, .chart-container, .prediction-conta
   padding: 0px 10px;
 }
 
-#category-li {
+.selected-li {
+  display: inline;
+  padding: 0 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #6C6FC6;
+}
+
+.unSelected-li {
   display: inline;
   padding: 0 16px;
   font-weight: bold;
@@ -520,10 +528,6 @@ div#item-changed {
   display: flex;
   flex-direction: column;
   font-size: medium;
-}
-
-div#item-changedprice, #item-changedpercent {
-  color: #FF0000;
 }
 
 img.item {
