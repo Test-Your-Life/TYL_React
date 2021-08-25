@@ -193,4 +193,9 @@ div#trade-sell {
   -o-object-fit: cover;
      object-fit: cover;
 }
+
+div#empty-space {
+  margin: 150px 0px;
+  padding: 16px 70px;
+}
 /*# sourceMappingURL=investment.css.map */

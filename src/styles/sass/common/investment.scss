@@ -168,7 +168,6 @@ div.trade-item {
 }
 
 div#trade-purchase {
-
   background-color: #3c52e2;
   color: #e3e3ec;
   overflow: hidden;
@@ -180,4 +179,9 @@ div#trade-sell {
   color: #e3e3ec;
   overflow: hidden;
   object-fit: cover;
+}
+
+div#empty-space {
+  margin: 150px 0px;
+  padding: 16px 70px;
 }

@@ -14,6 +14,7 @@ const index = () => {
             <Chart></Chart>
             <Prediction></Prediction>
             <Trade></Trade>
+            <div id="empty-space"></div>
         </>
     );
 };
