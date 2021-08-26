@@ -8,7 +8,6 @@ import Trade from './components/Trade/index.js';
 const index = () => {
     return (
         <>
-            <h1>Investment 페이지 입니다</h1>
             <Category></Category>
             <ItemList></ItemList>
             <Chart></Chart>

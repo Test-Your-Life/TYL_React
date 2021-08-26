@@ -491,6 +491,11 @@ div.category-container, .itemlist-container, .chart-container, .prediction-conta
   float: right;
 }
 
+div#items-container {
+  overflow: auto;
+  height: 300px;
+}
+
 div#item-container {
   display: flex;
   flex-direction: row;

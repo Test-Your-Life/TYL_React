@@ -7,22 +7,9 @@ import axios from 'axios';
 const ItemStorage = () => {
 
     //이름, 코드?(필요한가), 값, rate만 가져올 수 있도록한다.
-    const [Items, setItem] = useState([
-        {
-            code: "",
-            endValue: 0,
-            highValue: 0,
-            lowValue: 0,
-            name: "0",
-            rate: 0,
-            startValue: 0,
-            tradeAmount: 0,
-            value: 0,
-        },
-    ]);
-    /*
+    const [Items, setItem] = useState([]);
+    const [N_Scroll, setN_Scroll] = useState(1);
 
-    */
     useEffect(() => {
         // updateData() => setInterval 10초마다 장이열리는 시간이면 ㅋㅋ
         axios.get('/stock/real-data').then(res => {
@@ -40,40 +27,54 @@ const ItemStorage = () => {
         let prevValue = value / (1 + (rate / 100))
         return value - prevValue;
     }
-    let sibal = {
-        display: "#FF0000",
+
+    const onScroll = (e) => {
+        const scrollHeight = e.target.scrollHeight;
+        const scrollTop = e.target.scrollTop;
+        const clientHeight = e.target.clientHeight;
+        if (scrollTop + clientHeight >= scrollHeight * 0.9) {
+            setN_Scroll(N_Scroll + 1)
+        }
+        console.log(N_Scroll);
+
     }
 
+
     return (
-        <>
-            {Items.map((item, index) => {
-                const positive = item.rate > 0 ? true : false
-                return (
-                    < div className="item" id="item-container" key={item.id} >
+        <div id="items-container" onScroll={onScroll}>
+            {
+                Items.map((item, index) => {
+                    if (index < N_Scroll * 50) {
 
-                        <div className="item" id="item-img">
-                            {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
-                        </div>
+                        const positive = item.rate > 0 ? true : false
+                        return (
+                            < div className="item" id="item-container" key={item.id} >
 
-                        <div className="item" id="item-name">
-                            <p className="item">{item.name}</p>
-                        </div>
+                                <div className="item" id="item-img">
+                                    {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
+                                </div>
 
-                        <div className="item" id="item-price">
-                            {parseInt(item.value).toLocaleString('ko-KR')} TYL
-                        </div>
+                                <div className="item" id="item-name">
+                                    <p className="item">{item.name}</p>
+                                </div>
 
-                        <div className="item" id="item-changed">
-                            <div id="item-changedprice" style={positive > 0 ? { color: '#FF0000' } : { color: '#001AFF' }}>{positive > 0 ? "+" : ""}{parseInt(fluctuationCal(item.value, item.rate)).toLocaleString('ko-KR')}</div>
-                            <div id="item-changedpercent" style={positive > 0 ? { color: '#FF0000' } : { color: '#001AFF' }}>({item.rate}%)</div>
-                        </div>
+                                <div className="item" id="item-price">
+                                    {parseInt(item.value).toLocaleString('ko-KR')} TYL
+                                </div>
+
+                                <div className="item" id="item-changed">
+                                    <div id="item-changedprice" style={positive > 0 ? { color: '#FF0000' } : { color: '#001AFF' }}>{positive > 0 ? "+" : ""}{parseInt(fluctuationCal(item.value, item.rate)).toLocaleString('ko-KR')}</div>
+                                    <div id="item-changedpercent" style={positive > 0 ? { color: '#FF0000' } : { color: '#001AFF' }}>({item.rate}%)</div>
+                                </div>
 
 
-                    </div>
-                );
-            })}
+                            </div>
+                        );
+                    }
+                })
+            }
 
-        </>
+        </div >
     );
 
 };

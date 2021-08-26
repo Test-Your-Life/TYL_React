@@ -28,7 +28,6 @@ const ItemList = () => {
         <div className="itemlist-container">
             {SearchForm}
             <ItemStorage></ItemStorage>
-
         </div >
     );
 };
