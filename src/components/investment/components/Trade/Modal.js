@@ -3,12 +3,14 @@ import axios from 'axios';
 
 const Modal = props => {
     const { close, modalData } = props;
-    const [data, setdata] = useState();
+    // const [data, setdata] = useState();
     const [value, setValue] = React.useState("");
     const inputRef = React.useRef();
+    let data;
+
 
     const modalEl = useRef(); // modal Ref
-    const btnEl = useRef(); // modal Ref
+    const btnEl = useRef(); // btn Ref
 
     useEffect(() => {
         window.addEventListener("click", handleClickOutside);
@@ -24,18 +26,22 @@ const Modal = props => {
             close();
         }
         else if (btnEl.current.contains(target)) {
+            console.log("거래되었습니다.");
+            console.log(data);
+
             axios.post('stock/transaction', data).then(res => {
                 console.log("onClickBtn => ", res.data);
             });
             close();
-            console.log("거래되었습니다.");
         }
 
     };
 
     const onChangeInput = (e) => {
         setValue(e.target.value);
-        setdata({ trsType: modalData.trsType, code: modalData.code, name: modalData.name, assetType: 'STOCK', value: modalData.value, amount: e.target.value, });
+        // setdata({ trsType: modalData.trsType, code: modalData.code, name: modalData.name, assetType: 'STOCK', value: modalData.value, amount: e.target.value, });
+        data = { trsType: modalData.trsType, code: modalData.code, name: modalData.name, assetType: 'STOCK', value: modalData.value, amount: e.target.value, };
+        console.log("onChangeInput:", data);
     };
 
 
@@ -56,7 +62,7 @@ const Modal = props => {
                         </div>
 
                         <div className="modal-item-dealBtn">
-                            <label id="modal-deal-label" ref={btnEl} >{modalData.Deal == "purchase" ? "구매하기" : "판매하기"}</label>
+                            <label id="modal-deal-label" ref={btnEl} >{modalData.trsType == "purchase" ? "구매하기" : "판매하기"}</label>
                         </div>
                     </div>
                 </div>
