@@ -750,6 +750,7 @@ div#items-container {
 }
 
 div#item-container {
+  margin: 3px 0px;
   display: flex;
   flex-direction: row;
   font-weight: bold;

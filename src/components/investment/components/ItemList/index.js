@@ -8,8 +8,7 @@ const ItemList = (props) => {
     }
 
     const [inputValue, setInputValue] = useState("");
-    const inputRef = useRef();
-    const scrollRef = useRef();
+
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -19,20 +18,13 @@ const ItemList = (props) => {
         setInputValue(e.target.value);
     };
 
-    const mouseenter = (e) => {
-        scrollRef.current.focus();
-    }
-
-    const mouseleave = (e) => {
-        scrollRef.current.blur();
-    }
 
     // https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_960_720.png
     const SearchForm = (
         <div>
             <form id="itemlist-searchform" onSubmit={onSubmit}>
                 {/* <img id="itemlist-searchform-img" src="https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_960_720.png" ></img> */}
-                <input id="itemlist-searchform-input" ref={inputRef} type="text" value={inputValue} placeholder="Search.." autoFocus onChange={onChangeInput}>
+                <input id="itemlist-searchform-input" type="text" value={inputValue} placeholder="Search.." autoFocus onChange={onChangeInput}>
 
                 </input>
             </form>
