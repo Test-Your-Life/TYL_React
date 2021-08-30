@@ -146,8 +146,8 @@ const Chart = () => {
         plotOptions: {
             candlestick: {
                 colors: {
-                    upward: '#FF0000',
-                    downward: '#001AFF'
+                    upward: '#EB5374',
+                    downward: '#5673EB'
                 },
                 wick: {
                     useFillColor: true,
