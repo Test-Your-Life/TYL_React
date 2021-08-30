@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ItemStorage from './ItemStorage.js';
 
 const ItemList = (props) => {
@@ -7,8 +7,9 @@ const ItemList = (props) => {
         props.getItem(item);
     }
 
-    const [inputValue, setInputValue] = React.useState("");
-    const inputRef = React.useRef();
+    const [inputValue, setInputValue] = useState("");
+    const inputRef = useRef();
+    const scrollRef = useRef();
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -17,6 +18,14 @@ const ItemList = (props) => {
     const onChangeInput = (e) => {
         setInputValue(e.target.value);
     };
+
+    const mouseenter = (e) => {
+        scrollRef.current.focus();
+    }
+
+    const mouseleave = (e) => {
+        scrollRef.current.blur();
+    }
 
     // https://cdn.pixabay.com/photo/2017/01/13/01/22/magnifying-glass-1976105_960_720.png
     const SearchForm = (
@@ -31,7 +40,7 @@ const ItemList = (props) => {
     );
 
     return (
-        <div className="itemlist-container">
+        <div className="itemlist-container" >
             {SearchForm}
             <ItemStorage getItem={getItem} inputValue={inputValue} ></ItemStorage>
         </div >

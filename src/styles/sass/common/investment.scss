@@ -20,9 +20,9 @@ div.category-container, .itemlist-container, .chart-container, .prediction-conta
 
 #category-div {
   display:inline;
-  text-align: center;
+  white-space:nowrap;
   list-style:none;
-  padding:0px 10px;
+  padding:0px;
   
 }
 
@@ -135,6 +135,41 @@ img.item {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+#chartInfo-div{
+  font-weight: 550;
+  font-size: smaller;
+  margin: 15px;
+}
+
+div.chartInfo-date {
+  text-align: center;
+  color: #9c9c9c;
+  margin: 3px;
+}
+
+div.chartInfo {
+  // margin: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+div.chartInfo-container{
+  margin: 0px 5px;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+
+div.chartInfo-text{
+  width: 50%;
+  text-align: left;
+}
+
+div.chartInfo-data{
+  width: 50%;
+  text-align: right;
 }
 
 div.prediction-item-container {

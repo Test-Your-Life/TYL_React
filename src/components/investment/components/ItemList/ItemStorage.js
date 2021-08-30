@@ -19,8 +19,6 @@ const ItemStorage = (props) => {
             let newArr = res.data.map((item, i) => {
                 return { item };
             });
-            console.log("res.data 입니다");
-            console.log(res.data);
             setItem(res.data);
         });
     }, []);
@@ -123,6 +121,7 @@ const ItemStorage = (props) => {
 
     return (
         <div id="items-container" onScroll={onScroll}>
+            {props.getItem(items[0])}
             {props.inputValue.length <= 0 ? allResult(items) : filteredResult(items)}
         </div >
     );
