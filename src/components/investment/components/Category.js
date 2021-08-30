@@ -17,12 +17,12 @@ const Category = () => {
 
 
         <div className="category-container">
-            <div id="category-ul">
-                <div className={selected == "stock" ? "selected-li" : "unSelected-li"} id="stock" onClick={onClick}> 주식</div>
-                <div className={selected == "coin" ? "selected-li" : "unSelected-li"} id="coin" onClick={onClick}>암호화폐</div>
-                <div className={selected == "deposit" ? "selected-li" : "unSelected-li"} id="deposit" onClick={onClick}>예·적금</div>
-                <div className={selected == "realestate" ? "selected-li" : "unSelected-li"} id="realestate" onClick={onClick}>부동산</div>
-                <div className={selected == "gold" ? "selected-li" : "unSelected-li"} id="gold" onClick={onClick}>금</div>
+            <div id="category-div">
+                <div className={selected == "stock" ? "selected-category" : "unSelected-category"} id="stock" onClick={onClick}> 주식</div>
+                <div className={selected == "coin" ? "selected-category" : "unSelected-category"} id="coin" onClick={onClick}>암호화폐</div>
+                <div className={selected == "deposit" ? "selected-category" : "unSelected-category"} id="deposit" onClick={onClick}>예·적금</div>
+                <div className={selected == "realestate" ? "selected-category" : "unSelected-category"} id="realestate" onClick={onClick}>부동산</div>
+                <div className={selected == "gold" ? "selected-category" : "unSelected-category"} id="gold" onClick={onClick}>금</div>
             </div>
         </div >
     );

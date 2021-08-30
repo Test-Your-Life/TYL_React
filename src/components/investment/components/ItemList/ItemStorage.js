@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Trade from '../Trade/index.js';
 //https://search.pstatic.net/sunny/?src=https%3A%2F%…%2F_images%2Ffavicon.ico&type=f30_30_png_expire24 삼성이미지
 // 라이프 사이클,
 // useeffect 렌더링 전 , 후 표시?
 // 렌더링 되기 전 데이터를 받아와야 함
-const ItemStorage = () => {
+const ItemStorage = (props) => {
 
     //이름, 코드?(필요한가), 값, rate만 가져올 수 있도록한다.
     const [Items, setItem] = useState([]);
     const [N_Scroll, setN_Scroll] = useState(1);
+    const [selectedItem, setSelectedItem] = useState({});
 
     useEffect(() => {
         // updateData() => setInterval 10초마다 장이열리는 시간이면 ㅋㅋ
@@ -39,6 +41,11 @@ const ItemStorage = () => {
 
     }
 
+    const onClick = (item) => {
+        props.getItem(item);
+    }
+
+
 
     return (
         <div id="items-container" onScroll={onScroll}>
@@ -48,7 +55,8 @@ const ItemStorage = () => {
 
                         const positive = item.rate > 0 ? true : false
                         return (
-                            < div className="item" id="item-container" key={item.id} >
+                            < div className="item" id="item-container" key={item.id} onClick={() => { onClick(item, item.name, item.value); }
+                            } >
 
                                 <div className="item" id="item-img">
                                     {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
