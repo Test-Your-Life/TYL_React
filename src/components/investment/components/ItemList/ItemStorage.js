@@ -118,10 +118,6 @@ const ItemStorage = (props) => {
         );
     }
 
-                                <div className="item" id="item-changed">
-                                    <div id="item-changedprice" style={positive > 0 ? { color: '#FF0000' } : { color: '#001AFF' }}>{positive > 0 ? "+" : ""}{parseInt(fluctuationCal(item.value, item.rate)).toLocaleString('ko-KR')}</div>
-                                    <div id="item-changedpercent" style={positive > 0 ? { color: '#FF0000' } : { color: '#001AFF' }}>({item.rate}%)</div>
-                                </div>
 
     return (
         <div id="items-container" onScroll={onScroll}>
