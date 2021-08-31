@@ -1,9 +1,10 @@
 import React from 'react';
+import AllRank from '../presentational/AllRank';
 
 const AllTab = () => {
   return (
     <>
-      <ul className="ranking-container"></ul>
+      <AllRank />
     </>
   );
 };
