@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SwitchTab from './SwitchTab';
 
 const Category = () => {
   const [selected, setSelected] = useState('all');
@@ -53,6 +54,8 @@ const Category = () => {
           부동산
         </div>
       </ul>
+
+      <SwitchTab id={selected} />
     </>
   );
 };
