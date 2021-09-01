@@ -4,7 +4,7 @@ const CoinTab = () => {
   return (
     <>
       <ul className="ranking-container">
-        <h3>빈 페이지 입니다</h3>
+        <h4>시스템 점검중입니다!</h4>
       </ul>
     </>
   );
