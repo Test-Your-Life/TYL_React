@@ -1,6 +1,6 @@
 // install (please make sure versions match peerDependencies)
 // yarn add @nivo/core @nivo/line
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
@@ -8,44 +8,15 @@ import { ResponsiveLine } from '@nivo/line';
 // website examples showcase many properties,
 // you'll often use just a few of them.
 
-const AssetGraph = () => {
-  const data = [
-    {
-      id: 'TYL',
-      data: [
-        {
-          x: '20.3',
-          y: 1000000,
-        },
-        {
-          x: '20.4',
-          y: 150000,
-        },
-        {
-          x: '20.5',
-          y: 27000,
-        },
-        {
-          x: '20.6',
-          y: 14100000,
-        },
-        {
-          x: '20.7',
-          y: 54600,
-        },
-        {
-          x: '20.8',
-          y: 160,
-        },
-      ],
-    },
-  ];
+const AssetGraph = ({ data }) => {
+  const clickButton = event => {
+  };
 
   return (
     <div className="graph-container">
       <div
         style={{
-          height: '100%',
+          height: '245px',
           width: '100%',
         }}
       >
@@ -69,6 +40,15 @@ const AssetGraph = () => {
             legendPosition: 'middle',
           }}
           axisLeft={false}
+          // axisLeft={{
+          //   orient: 'left',
+          //   tickSize: 0,
+          //   tickPadding: 15,
+          //   tickRotation: 0,
+          //   legend: '',
+          //   legendOffset: -40,
+          //   legendPosition: 'middle',
+          // }}
           pointSize={10}
           pointColor={{ theme: 'background' }}
           pointBorderWidth={2}
@@ -80,6 +60,21 @@ const AssetGraph = () => {
           enableCrosshair={false}
           enableSlices={'x'}
         />
+        <hr width="380px" color="#c4c4c4" noshade="true" />
+        <div className="graph-button">
+          <button className="button" onClick={clickButton}>
+            1주일
+          </button>
+          <button className="button" onClick={clickButton}>
+            1개월
+          </button>
+          <button className="button" onClick={clickButton}>
+            3개월
+          </button>
+          <button className="button" onClick={clickButton}>
+            6개월
+          </button>
+        </div>
       </div>
     </div>
   );

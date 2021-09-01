@@ -9,7 +9,7 @@ import Auth from '../auth/index.js';
 import '../../styles/sass/main.css';
 import { useSelector } from 'react-redux';
 import { checkValidity, selectUser } from '../auth/userSlice';
-import MyAsset from '../asset/components/MyAsset';
+import MyAssetContainer from '../asset/components/container/MyAssetContainer';
 import profile_img from '../../styles/images/profile_img.png';
 
 const Page = () => {
@@ -55,7 +55,7 @@ const Page = () => {
     }
     return (
       <li key={idx}>
-        <NavLink exact to={menu.link} activeClassName="active">
+        <NavLink to={menu.link} activeClassName="active">
           {menu.title}
         </NavLink>
       </li>
@@ -65,8 +65,7 @@ const Page = () => {
   return (
     <div className="page">
       <div className="menu-bar">
-        <h2>LOGO</h2>
-        <h4>{user.nickname}</h4>
+        <div className="logo">Test Your Life</div>
         <ul className="tabs">{topMenuList}</ul>
         <ul className="tabs">{bottomMenuList}</ul>
       </div>
@@ -78,8 +77,9 @@ const Page = () => {
         <Route exact path="/Asset" component={Asset} />
         <Route path="/Profile" component={Profile} />
         <Route path="/login" component={Auth} />
-        <Route path="/Asset/stock" component={MyAsset} />
-        <Route path="/Asset/btc" component={MyAsset} />
+        <Route path="/Asset/cash" component={MyAssetContainer} />
+        <Route path="/Asset/stock" component={MyAssetContainer} />
+        <Route path="/Asset/coin" component={MyAssetContainer} />
       </div>
     </div>
   );
