@@ -5,6 +5,11 @@
 @import './common/investment.scss';
 @import './common/ranking.scss';
 @import './common/color.scss';
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+ * { 
+    font-family: 'Noto Sans KR', sans-serif;
+   }
 
 html{
     background-color: $background;
