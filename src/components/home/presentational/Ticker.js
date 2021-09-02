@@ -28,8 +28,8 @@ function Ticker({ info, str }) {
 
   return (
     <>
-      <div className="flexContainer">
-        <div className="tickerWrapper">
+      <div className="tickerbox-container">
+        <div className="ticker-wrapper">
           {Transitions(({ opacity }, item) => {
             const TickerItem = tickerItems[item];
             return (
