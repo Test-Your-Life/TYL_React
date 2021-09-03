@@ -1,56 +1,53 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-const Modal = props => {
-    const { close, modalData } = props;
-    // const [data, setdata] = useState();
-    const [inputAmount, setValue] = React.useState("");
-    const inputRef = React.useRef();
-    let data;
 
+const Modal = props => {
+    const { closeModal, modalData } = props;
+
+    // const [data, setdata] = useState();
+    const [inputAmount, setValue] = useState("");
+    const inputRef = useRef();
     const modalEl = useRef(); // modal Ref
     const btnEl = useRef(); // btn Ref
+    let data;
 
     useEffect(() => {
         window.addEventListener("click", handleClickOutside);
         inputRef.current.focus();
         return () => {
-            window.removeEventListener("click", handleClickOutside);
+            window.removeEventListener("click", handleClickOutside)
         };
     }, []);
 
     useEffect(() => {
-        console.log("inputAmount.length => ", inputAmount.length);
-        console.log("inputAmount => ", inputAmount);
         data = { trsType: modalData.trsType, code: modalData.code, name: modalData.name, assetType: 'STOCK', value: modalData.value, amount: parseInt(inputAmount), };
     }, [inputAmount]);
 
+
     const handleClickOutside = ({ target }) => {
         if (!modalEl.current.contains(target)) {
-            close();
+            closeModal({ open: false, text: '', });
         }
     };
 
+
+
     const onClicklabel = ({ target }) => {
         console.log("버튼 클릭=>", data.amount);
-
         // 여기다 모달추가
         axios.post('stock/transaction', data).then(res => {
             console.log("onClickBtn => ", res.data);
-            close();
+            closeModal({ open: true, text: res.data.message, });
         });
     };
 
     const onChangeInput = (e) => {
         setValue(e.target.value);
-        console.log(e.target.value);
-        console.log("e.target.value.length => ", e.target.value.length);
     };
 
-
-    return (
-        // 모달이 열릴때 openModal 클래스가 생성된다.
-        <div className='trade-openModal trade-modal' >
+    return (<>
+        < div className='trade-openModal trade-modal' >
             <section ref={modalEl}>
                 < div className="modal-header-container"  >
 
@@ -89,6 +86,7 @@ const Modal = props => {
                 </div>
             </section>
         </div >
+    </>
     );
 
 };
