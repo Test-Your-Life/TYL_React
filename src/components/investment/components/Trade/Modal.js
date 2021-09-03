@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
-
 const Modal = props => {
     const { closeModal, modalData } = props;
 
@@ -43,7 +42,9 @@ const Modal = props => {
     };
 
     const onChangeInput = (e) => {
+
         setValue(e.target.value);
+
     };
 
     return (<>
@@ -73,16 +74,13 @@ const Modal = props => {
 
                     <div className="modal-item-info">
                         <div className="modal-item-text">{modalData.trsType == "buy" ? "구매수량" : "판매수량"}</div>
-
-
                         <div className="modal-item-myinput">
                             <input id="modal-input" ref={inputRef} type="number" value={inputAmount} onChange={onChangeInput} placeholder="수량을 입력하세요" ></input>
                         </div>
                         <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주</div>
-
                     </div>
-
                     <div className="modal-item-info"><div className="modal-item-text">{modalData.trsType == "buy" ? "구매총액" : "판매총액"}</div><div className="modal-item-myinfo">{(inputAmount.length <= 0) ? 0 : parseInt(inputAmount * modalData.value).toLocaleString('ko-KR')} TYL</div></div>
+
                 </div>
             </section>
         </div >

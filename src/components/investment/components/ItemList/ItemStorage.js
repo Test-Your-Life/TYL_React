@@ -43,6 +43,11 @@ const ItemStorage = (props) => {
         });
     }
 
+    useEffect(() => {
+        console.log("setItem 끝났습니다. items[0]=> ", items[0]);
+        props.getItem(items[0]);
+    }, [items]);
+
     const fluctuationCal = (value, rate) => {
         let prevValue = value / (1 + (rate / 100))
         let result = value - prevValue
