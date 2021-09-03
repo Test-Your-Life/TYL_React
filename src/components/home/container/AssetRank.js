@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import RankList from '../presentational/RankList';
 import axios from 'axios';
-import '../../../styles/sass/main.css';
+import RankList from '../presentational/RankList';
 
 const AssetRank = () => {
   const [rank, setRank] = useState([]);
 
   useEffect(() => {
     axios.get('rank/asset').then(res => {
-      //console.log(res.data);
       setRank(res.data.rank);
+      //console.log(res.data.rank);
     });
   }, []);
 
-  //console.log('>>', rank);
+  // json add data(ranking)
+  for (let i = 0; i < rank.length; i++) {
+    rank[i].ranking = i + 1;
+  }
 
-  const peopleList = [
-    { rank: '1위', nk_name: 'KIM', asset: '400,000,000틸' },
-    { rank: '2위', nk_name: 'LEE', asset: '300,000,000틸' },
-    { rank: '3위', nk_name: 'LIM', asset: '200,000,000틸' },
-    { rank: '4위', nk_name: 'SON', asset: '80,000,000틸' },
-    { rank: '5위', nk_name: 'YUN', asset: '50,000,000틸' },
-    { rank: '6위', nk_name: 'PARK', asset: '10,000,000틸' },
-  ];
-
-  return <RankList info={peopleList} />;
+  return <RankList info={rank} />;
 };
 
 export default AssetRank;
