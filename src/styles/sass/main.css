@@ -630,11 +630,10 @@ input::placeholder {
 }
 
 ul.home-tickerbox {
-  width: 80%;
+  width: 100%;
   display: block;
-  padding: 3%;
-  margin: 5%;
-  margin-bottom: 0;
+  padding: 0%;
+  margin: 0% 0% 7% 0%;
   background-color: #fff;
   border: 1px solid #c4c4c4;
   border-radius: 10px 10px 10px 10px;
@@ -645,6 +644,7 @@ ul.home-tickerbox {
   text-align: right;
   font-weight: normal;
   font-size: x-small;
+  padding: 1% 2% 0% 0%;
   color: #C4C4C4;
 }
 
@@ -655,8 +655,8 @@ ul.home-tickerbox {
 }
 
 .tickerbox-container {
-  padding: 4% 0% 7% 0%;
-  height: 0;
+  margin-top: 6%;
+  height: 50px;
 }
 
 .ticker-wrapper {
@@ -702,9 +702,9 @@ ul.home-tickerbox {
   }
 }
 ul.home-rankbox {
-  width: 80%;
-  padding: 3%;
-  margin: 5%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
   background-color: #fff;
   border: 1px solid #c4c4c4;
   border-radius: 10px 10px 10px 10px;
@@ -723,10 +723,14 @@ ul.ranking-list {
   display: inline-flex;
   justify-content: space-between;
   padding: 2% 5% 2% 5%;
-  margin: 1.5%;
+  margin: 0% 0% 2% 0%;
   background-color: #fff;
   border: 1px solid #c4c4c4;
   border-radius: 10px 10px 10px 10px;
+}
+
+.rank-color {
+  width: 10%;
 }
 
 .list-text {
@@ -1230,6 +1234,10 @@ html {
 
 body {
   margin: 0px;
+}
+
+body::-webkit-scrollbar {
+  width: 0px;
 }
 
 .container {

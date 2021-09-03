@@ -19,9 +19,9 @@ const RankFrame = ({ info }) => {
   return (
     <>
       <ul className="ranking-list">
-        <div className="list-text">
-          <Rank_123 />
-        </div>
+          <div className="list-text">
+            <Rank_123 />
+          </div>
         <div className="list-text">{nickname}</div>
         <div className="list-text">{asset} 틸</div>
       </ul>

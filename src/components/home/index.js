@@ -7,12 +7,12 @@ const index = () => {
   return (
     <>
       <ul className="home-tickerbox">
-        <div className="home-small-info-text">*9/2 (전일대비)</div>
+        <div className="home-small-info-text">*전일대비</div>
         <div className="home-ticker-title-text">전날 엄청난 수익률을 낸 틸러입니다!</div>
         <BestRank />
       </ul>
       <ul className="home-tickerbox">
-        <div className="home-small-info-text">*9/2 (전일대비)</div>
+        <div className="home-small-info-text">*전일대비</div>
         <div className="home-ticker-title-text">전날 아쉬웠던 수익률을 낸 틸러입니다..</div>
         <WorstRank />
       </ul>

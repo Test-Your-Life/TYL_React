@@ -11,7 +11,7 @@ const WorstRank = () => {
     axios.get('rank/preday-history').then(res => {
       setRank(res.data.lowerRank);
       setInProgress(false);
-      //console.log(res.data.lowerRank);
+      // console.log(res.data);
     });
   }, []);
 
@@ -19,18 +19,7 @@ const WorstRank = () => {
     return <div></div>;
   }
 
-  const peopleRank = [
-    { nickname: '김병준', profit: '41.5' },
-    { nickname: '임대호', profit: '38.7' },
-    { nickname: '김동규', profit: '35.0' },
-    { nickname: '김태성', profit: '29.3' },
-    { nickname: '김예겸', profit: '28.4' },
-    { nickname: '허예림', profit: '23.2' },
-    { nickname: '배지영', profit: '18.0' },
-    { nickname: '김재우', profit: '14.6' },
-  ];
-
-  return <Ticker info={peopleRank} str="worst" />;
+  return <Ticker info={rank} str="worst" />;
 };
 
 export default WorstRank;
