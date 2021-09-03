@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Modal from './Modal.js';
+import Message from './Message';
 
 const Trade = (props) => {
     // https://image.flaticon.com/icons/png/512/5381/5381292.png
@@ -7,24 +8,33 @@ const Trade = (props) => {
     const [selectedItem, setSelectedItem] = useState();
     const [modalOpen, setModalOpen] = useState(false);
     const [modalData, setModalData] = useState();
+    const [message, setMessage] = useState({ open: false, text: "", });
 
     useEffect(() => { // props.Name의 값이 변경될 때 마다 실행.
-
-        console.log("Modal's props :", props.sendItem);
         setSelectedItem(props.sendItem);
     }, [props]);
 
+    const getMessage = (msg) => {
+        setMessage(msg);
+    }
 
-    const closeModal = () => {
+    const closeModal = (msg) => {
         setModalOpen(false);
+        setMessage(msg);
+    };
+
+    const closeMessage = () => {
+        setMessage({ open: false, text: "", });
     };
 
     const openModal = e => {
         e.target.id === 'trade-purchase'
-            ? setModalData({ code: selectedItem.code, name: selectedItem.name, value: selectedItem.value, trsType: "purchase", assetType: 'STOCK', })
+            ? setModalData({ code: selectedItem.code, name: selectedItem.name, value: selectedItem.value, trsType: "buy", assetType: 'STOCK', })
             : setModalData({ code: selectedItem.code, name: selectedItem.name, value: selectedItem.value, trsType: "sell", assetType: 'STOCK', })
         setModalOpen(true);
     };
+
+
 
     return (<>
         <div className="trade-container">
@@ -34,11 +44,18 @@ const Trade = (props) => {
         {
             modalOpen ?
                 <Modal
-                    close={closeModal}
+                    closeModal={closeModal}
                     modalData={modalData}
+                    getMessage={getMessage}
                 >
                 </Modal> : null
         }
+        {
+            message.open ?
+                <Message text={message.text} closeMessage={closeMessage}>
+                </Message> : null
+        }
+
     </>);
 };
 

@@ -11,17 +11,42 @@ const ItemStorage = (props) => {
     const [items, setItem] = useState([]);
     const [N_Scroll, setN_Scroll] = useState(1);
     const [selectedItem, setSelectedItem] = useState({});
+    var cnt = 0;
+
 
     useEffect(() => {
         // updateData() => setInterval 10초마다 장이열리는 시간이면 ㅋㅋ
+        getItem();
+        var interval = setInterval(getItem, 10000);
+        return () => {
+            console.log("I'm dying...");
+            clearInterval(interval);
+        };
+    }, []);
+
+    // 유즈이펙트 나갈때 타이머 종료 실행
+    // 
+
+    useEffect(() => {
+        props.getItem(items[0]);
+    }, [items]);
+
+    const getItem = () => {
+        cnt += 1;
         axios.get('/stock/real-data').then(res => {
-            console.log(res.data);
+            console.log("데이터를 불러왔습니다. =>", cnt, res.data);
+
             let newArr = res.data.map((item, i) => {
                 return { item };
             });
             setItem(res.data);
         });
-    }, []);
+    }
+
+    useEffect(() => {
+        console.log("setItem 끝났습니다. items[0]=> ", items[0]);
+        props.getItem(items[0]);
+    }, [items]);
 
     const fluctuationCal = (value, rate) => {
         let prevValue = value / (1 + (rate / 100))
@@ -37,7 +62,6 @@ const ItemStorage = (props) => {
         if (scrollTop + clientHeight >= scrollHeight * 0.9) {
             setN_Scroll(N_Scroll + 1)
         }
-        console.log(N_Scroll);
 
     }
 
@@ -46,7 +70,6 @@ const ItemStorage = (props) => {
     }
 
     const allResult = (items) => {
-        console.log("allResult(): ", items)
 
         return (
             items.map((item, index) => {
@@ -54,8 +77,7 @@ const ItemStorage = (props) => {
 
                     const positive = item.rate > 0 ? true : false
                     return (
-                        < div className="item" id="item-container" key={item.id} onClick={() => { onClick(item, item.name, item.value); }
-                        } >
+                        < div className="item" id="item-container" key={item.id} onClick={() => { onClick(item, item.name, item.value); }}>
 
                             <div className="item" id="item-img">
                                 {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
@@ -121,7 +143,6 @@ const ItemStorage = (props) => {
 
     return (
         <div id="items-container" onScroll={onScroll}>
-            {props.getItem(items[0])}
             {props.inputValue.length <= 0 ? allResult(items) : filteredResult(items)}
         </div >
     );

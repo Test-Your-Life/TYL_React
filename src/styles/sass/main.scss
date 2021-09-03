@@ -15,7 +15,16 @@ html{
     background-color: $background;
 }
 
+body{
+    margin: 0px;
+}
+
+body::-webkit-scrollbar {
+    width: 0px;
+}
+
 .container {
+    padding: 40px 0px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -24,7 +33,7 @@ html{
 }
 
 .main-layout{
-    width: 720px;
+    width: 830px;
     height: fit-content;
     margin: 0;
     background-color: $background;
@@ -32,9 +41,10 @@ html{
 }
 
 .page{
+    position: relative;
     display: inline-flex;
     box-sizing: border-box;
-    width: 720px;
+    width: 100%;
     height: fit-content;
     margin: 0;
 }
