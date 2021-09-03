@@ -125,7 +125,6 @@ const ItemStorage = (props) => {
 
     return (
         <div id="items-container" onScroll={onScroll}>
-
             {props.inputValue.length <= 0 ? allResult(items) : filteredResult(items)}
         </div >
     );
