@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Ticker from '../presentational/Ticker';
 import axios from 'axios';
 import '../../../styles/sass/main.css';
 
 const BestRank = () => {
-  // https://testyourlife.kro.kr/preday-history
-  axios.get('rank/preday-history').then(res => {
-    console.log(res.data);
-  });
+  const [rank, setRank] = useState([]);
+
+  useEffect(() => {
+    // https://testyourlife.kro.kr/preday-history
+    axios.get('rank/preday-history').then(res => {
+      console.log(res.data.upperRank);
+      setRank(res.data.rank);
+    });
+  }, []);
 
   const peopleRank = [
     { rank: '1위', nk_name: '나는야개미', profit: '+28.3%' },

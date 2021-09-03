@@ -6,7 +6,7 @@ import '../../../styles/sass/main.css';
 const WorstRank = () => {
   // https://testyourlife.kro.kr/preday-history
   axios.get('rank/preday-history').then(res => {
-    console.log(res.data);
+    //console.log(res.data);
   });
 
   const peopleRank = [

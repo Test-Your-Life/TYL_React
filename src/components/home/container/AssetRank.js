@@ -8,12 +8,12 @@ const AssetRank = () => {
 
   useEffect(() => {
     axios.get('rank/asset').then(res => {
-      console.log(res);
+      //console.log(res.data);
       setRank(res.data.rank);
     });
   }, []);
 
-  // console.log('>>', rank);
+  //console.log('>>', rank);
 
   const peopleList = [
     { rank: '1위', nk_name: 'KIM', asset: '400,000,000틸' },
