@@ -9,7 +9,8 @@
     align-items: center;
     box-sizing: border-box;
     height:100%;
-    width:300px;
+    width:240px;
+    margin-right: 80px;
   }
 
   .tablet-menu-bar {
@@ -23,12 +24,12 @@
 
   ul.tabs {
     display: inline-block;
-    width: 95%;
+    width: 100%;
     background-color: #fff;
-    border: 1px solid #c4c4c4;
+    border: 1px solid #c4c4c420;
     border-radius: 10px 10px 10px 10px;
     padding-left: 0;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
 }
 
 ul.tabs li:first-child {
@@ -43,26 +44,25 @@ ul.tabs li:last-child {
 
 .tabs li {
     font-family: "Noto Sans KR";
-
     display:block;
     width: 100%;
     box-sizing: border-box;
     text-align: left;
-    padding: 15px;
+    padding: 12px;
     padding-left: 25px;
-    font-size:smaller;
+    font-size:14px;
     font-weight: bolder;
 }
 
 a:hover{
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: underline 2px;
     text-underline-position: under;
     color: $selected-menu;
 }
 
 .active{
-    text-decoration: underline 1.5px;
+    text-decoration: underline 2px;
     text-underline-position: under;
     color: $selected-menu;
 }
@@ -78,7 +78,7 @@ a {
       padding-right: 0px;
       padding-top: 10px;
       padding-bottom: 6px;
-      border-bottom: 1px solid #c4c4c4;
+      border-bottom: 1px solid #c4c4c480;
   }
 
 .user-name{
@@ -112,13 +112,13 @@ a {
     .logo{
         box-sizing: border-box;
         display: inline-block;
-        width: 95%;
+        width: 100%;
         background-color: #fff;
-        border: 1px solid #c4c4c4;
+        border: 1px solid #c4c4c420;
         border-radius: 10px 10px 10px 10px;
         padding-left: 0;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        margin-top: 14%;
+        box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
+       // margin-top: 14%;
         margin-bottom: 16px;
         padding: 10px;
         color: #5673EB;
