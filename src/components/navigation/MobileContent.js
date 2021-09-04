@@ -9,22 +9,9 @@ import Profile from '../profile/index.js';
 import Auth from '../auth/index.js';
 import MyAssetContainer from '../asset/components/container/MyAssetContainer';
 
-const MobileTab = ({ list }) => {
-  const tabItems = list.map((e, idx) => {
-    console.log(e);
-    return (
-      <div key={idx} className="menu-item">
-        <NavLink exact to={e.link} activeClassName="active">
-          {e.title}
-        </NavLink>
-      </div>
-    );
-  });
-  useEffect(() => {}, []);
-
+const MobileContent = () => {
   return (
     <>
-      <div className="mobile-main-menu">{tabItems}</div>
       <div className="mobile-content">
         <Route path="/" component={Home} exact />
         <Route path="/Investment" component={Investment} />
@@ -41,4 +28,4 @@ const MobileTab = ({ list }) => {
   );
 };
 
-export default MobileTab;
+export default MobileContent;
