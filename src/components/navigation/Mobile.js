@@ -4,6 +4,7 @@ import '../../styles/sass/main.css';
 import { useSelector } from 'react-redux';
 import { checkValidity, selectUser } from '../auth/userSlice';
 import MobileTab from './MobileTab';
+import MenuModal from './MenuModal';
 import Mobilelogo from '../../styles/images/mobile-logo.svg';
 import MobileMenulogo from '../../styles/images/mobile-menu-logo.svg';
 
@@ -11,6 +12,16 @@ const Mobile = () => {
   const validity = useSelector(checkValidity);
   const user = useSelector(selectUser);
   const [bottomMenuBox, setBottomMenuBox] = useState([]);
+  const [modalState, setModalState] = useState(false);
+  const openModal = () => setModalState(true);
+  const closeModal = () => setModalState(false);
+
+  const tabBarItems = [
+    { link: '/', title: '홈' },
+    { link: '/Investment', title: '투자' },
+    { link: '/Prediction', title: '예측' },
+    { link: '/Ranking', title: '랭킹' },
+  ];
 
   useEffect(() => {
     if (validity) {
@@ -21,21 +32,6 @@ const Mobile = () => {
       ]);
     } else setBottomMenuBox([{ link: '/login', title: '로그인' }]);
   }, [validity]);
-
-  const topMenuBox = [
-    { link: '/', title: '홈' },
-    { link: '/Investment', title: '투자' },
-    { link: '/Prediction', title: '예측' },
-    { link: '/Ranking', title: '랭킹' },
-  ];
-
-  const topMenuList = topMenuBox.map((menu, idx) => (
-    <li key={idx}>
-      <NavLink exact to={menu.link} activeClassName="active">
-        {menu.title}
-      </NavLink>
-    </li>
-  ));
 
   // const bottomMenuList = bottomMenuBox.map((menu, idx) => {
   //   if (menu.title != '내 자산' && menu.title != '내 정보' && menu.title != '로그인') {
@@ -63,10 +59,11 @@ const Mobile = () => {
       <div className="mobile-menu-bar">
         <div className="mobile-top-menu">
           <img src={Mobilelogo}></img>
-          <img id="menu-logo" src={MobileMenulogo}></img>
+          <img id="menu-logo" src={MobileMenulogo} onClick={openModal}></img>
         </div>
-        <MobileTab list={topMenuBox} />
+        <MobileTab list={tabBarItems} />
       </div>
+      <MenuModal modalState={modalState} closeModal={closeModal} />
     </div>
   );
 };

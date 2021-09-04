@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import Home from '../home/index';
 import Investment from '../investment/index';
@@ -10,9 +10,21 @@ import Auth from '../auth/index.js';
 import MyAssetContainer from '../asset/components/container/MyAssetContainer';
 
 const MobileTab = ({ list }) => {
+  const tabItems = list.map((e, idx) => {
+    console.log(e);
+    return (
+      <div key={idx} className="menu-item">
+        <NavLink exact to={e.link} activeClassName="active">
+          {e.title}
+        </NavLink>
+      </div>
+    );
+  });
+  useEffect(() => {}, []);
+
   return (
     <>
-      <div className="mobile-main-menu"></div>
+      <div className="mobile-main-menu">{tabItems}</div>
       <div className="mobile-content">
         <Route path="/" component={Home} exact />
         <Route path="/Investment" component={Investment} />
