@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 
 const Message = props => {
-  const { text, closeMessage } = props;
+  const { text, closeMessage, data } = props;
 
   useEffect(() => {
     window.addEventListener('click', handleClickOutsideforMsg);
     var interval = setInterval(closeMessage, 2000);
+
     return () => {
       clearInterval(interval);
       window.removeEventListener('click', handleClickOutsideforMsg);

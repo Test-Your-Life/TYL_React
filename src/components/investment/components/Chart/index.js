@@ -7,6 +7,7 @@ import axios from 'axios';
 // 툴팁 : 마우스 포인터라 불리는 커서와 함께 동작한다.
 // 사용자가 커서에 항목을 클릭하지 않고 가리키면 조그마한 상자가 항목 위에 나타나서 보충 설명을 보여 준다.
 const Chart = props => {
+  const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
   const [series, setSeries] = useState([{}]);
   const [selectedItem, setSelectedItem] = useState();
   const [additionalData, setAdditionalData] = useState();
@@ -52,7 +53,7 @@ const Chart = props => {
             {
               data: res.data.history.map((res_data, index) => {
                 return {
-                  x: new Date(res_data.date),
+                  x: res_data.date,
                   y: [
                     res_data.startValue,
                     res_data.highValue,
@@ -81,8 +82,8 @@ const Chart = props => {
             }),
           );
         } else {
-          setAdditionalData();
           setSeries([{}]);
+          setAdditionalData();
           setTooltipIndex(0);
           setTooltipData({
             open: '',
@@ -100,8 +101,8 @@ const Chart = props => {
     title: {
       text: '',
       style: {
-        fontSize: '16px',
-        fontWeight: 'bold',
+        fontSize: '18px',
+        fontWeight: 'bolder',
         color: '#263238',
       },
     },
@@ -119,6 +120,9 @@ const Chart = props => {
           customIcons: [],
         },
         autoSelected: 'pan',
+      },
+      sparkline: {
+        enabled: true,
       },
     },
 
@@ -161,7 +165,7 @@ const Chart = props => {
 
         setTooltipIndex(dataPointIndex);
         setTooltipData({ open: o, high: h, low: l, close: c, date: d });
-        return '';
+        return '<div><div>';
       },
     },
 
@@ -179,12 +183,22 @@ const Chart = props => {
     },
   });
 
+  const getFormatDate = d => {
+    var date = new Date(d);
+    var year = date.getFullYear(); //yyyy
+    var month = 1 + date.getMonth(); //M
+    month = month >= 10 ? month : '0' + month; // month 두자리로 저장
+    var day = date.getDate(); //d
+    day = day >= 10 ? day : '0' + day; //day 두자리로 저장
+    return year + '.' + month + '.' + day;
+  };
+
   return (
     <div className="chart-container">
-      <ReactApexChart options={options} series={series} type="candlestick" height={300} />
+      <ReactApexChart options={options} series={series} type="candlestick" height={320} />
 
       <div id="chartInfo-div">
-        <div className="chartInfo-date">{tooltipData.date}</div>
+        <div className="chartInfo-date">{getFormatDate(tooltipData.date)}</div>
 
         <div className="chartInfo">
           <div className="chartInfo-container">
@@ -227,7 +241,7 @@ const Chart = props => {
                 additionalData != null ? additionalData[tooltipIndex].className : 'chartInfo-data'
               }
             >
-              {additionalData != null ? additionalData[tooltipIndex].rate : null}
+              {additionalData != null ? additionalData[tooltipIndex].rate : null}%
             </div>
           </div>
         </div>

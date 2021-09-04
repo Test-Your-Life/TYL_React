@@ -60,7 +60,9 @@ const Trade = props => {
       {modalOpen ? (
         <Modal closeModal={closeModal} modalData={modalData} getMessage={getMessage}></Modal>
       ) : null}
-      {message.open ? <Message text={message.text} closeMessage={closeMessage}></Message> : null}
+      {message.open ? (
+        <Message text={message.text} data={message.data} closeMessage={closeMessage}></Message>
+      ) : null}
     </>
   );
 };

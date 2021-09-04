@@ -171,6 +171,7 @@ img.item {
 div.chartInfo-date {
   text-align: center;
   color: #9c9c9c;
+  font-size: medium;
   margin: 3px;
 }
 
@@ -352,6 +353,7 @@ div#empty-space {
 
 
 
+
 .message-modal {
   display: none;
   position: fixed;
@@ -474,6 +476,19 @@ div.modal-item-myinfo {
   text-align: right;
 }
 
+div#modal-item-info-custom{
+  margin-bottom: 2px;
+}
+
+div#trade-error {
+  height: 15px;
+  padding: 0px;
+  margin: 0px 30px 0px 30px;
+  text-align: right;
+  font-size: small;
+  font-weight: bold;
+  color:#FF0000;
+}
 input:focus {outline:none;}
 
 div.modal-item-myinput {

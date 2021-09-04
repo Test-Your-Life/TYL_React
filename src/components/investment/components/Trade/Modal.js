@@ -6,6 +6,7 @@ const Modal = props => {
 
   // const [data, setdata] = useState();
   const [inputAmount, setValue] = useState('');
+  const [myAsset, setMyAsset] = useState('');
   const inputRef = useRef();
   const modalEl = useRef(); // modal Ref
   const btnEl = useRef(); // btn Ref
@@ -14,6 +15,20 @@ const Modal = props => {
   useEffect(() => {
     window.addEventListener('click', handleClickOutside);
     inputRef.current.focus();
+
+    if (modalData.trsType == 'buy') {
+      axios.get('asset').then(res => {
+        console.log('구매버튼 클릭 ==> ', res.data.cash.amount);
+        setMyAsset(res.data.cash.amount);
+      });
+    } else {
+      let url = 'stock/amount?code=' + String(modalData.code);
+      axios.get(url).then(res => {
+        //해야한다
+        console.log('판매버튼 클릭 ==> ', res.data.amount);
+      });
+    }
+
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
@@ -41,7 +56,7 @@ const Modal = props => {
     // 여기다 모달추가
     axios.post('stock/transaction', data).then(res => {
       console.log('onClickBtn => ', res.data);
-      closeModal({ open: true, text: res.data.message });
+      closeModal({ open: true, text: res.data.message, data: modalData });
     });
   };
 
@@ -79,8 +94,13 @@ const Modal = props => {
               </div>
             </div>
             <div className="modal-item-info">
-              <div className="modal-item-text">보유수량</div>
-              <div className="modal-item-myinfo">주</div>
+              <div className="modal-item-text">
+                {modalData.trsType == 'buy' ? '보유자산' : '보유수량'}
+              </div>
+              <div className="modal-item-myinfo">
+                {parseInt(myAsset).toLocaleString('ko-KR')}
+                {modalData.trsType == 'buy' ? ' TYL' : ' 주'}
+              </div>
             </div>
 
             <div className="modal-item-info">
@@ -101,7 +121,7 @@ const Modal = props => {
               <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주</div>
             </div>
 
-            <div className="modal-item-info">
+            <div className="modal-item-info" id="modal-item-info-custom">
               <div className="modal-item-text">
                 {modalData.trsType == 'buy' ? '구매총액' : '판매총액'}
               </div>
@@ -111,6 +131,10 @@ const Modal = props => {
                   : parseInt(inputAmount * modalData.value).toLocaleString('ko-KR')}{' '}
                 TYL
               </div>
+            </div>
+            <div id="trade-error">
+              {inputAmount * modalData.value > myAsset ? '보유자산이 부족합니다.' : null}
+              &nbsp;&nbsp;
             </div>
           </div>
         </section>
