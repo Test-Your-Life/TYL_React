@@ -928,6 +928,18 @@ div.chartInfo-data {
   text-align: right;
 }
 
+div.chartInfo-increased {
+  width: 50%;
+  text-align: right;
+  color: #EB5374;
+}
+
+div.chartInfo-decreased {
+  width: 50%;
+  text-align: right;
+  color: #5673EB;
+}
+
 div.prediction-item-container {
   display: flex;
   flex-direction: row;
