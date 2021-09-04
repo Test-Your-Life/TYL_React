@@ -2,11 +2,22 @@
 
 
 
-div.category-container, .itemlist-container, .chart-container, .prediction-container{
+.itemlist-container, .chart-container, .prediction-container{
   width: 510px;
   box-sizing: border-box;
   padding: 3%;
   margin: 5%;
+  background-color: #ffffff;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+div.category-container {
+  width: 510px;
+  box-sizing: border-box;
+  padding: 3%;
+  margin: 0 5% 5% 5%;
   background-color: #ffffff;
   border: 1px solid #c4c4c4;
   border-radius: 10px 10px 10px 10px;
@@ -43,15 +54,24 @@ div.category-container, .itemlist-container, .chart-container, .prediction-conta
 
 #itemlist-searchform {
   float: right;
+  margin-bottom: 3%;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.itemlist-searchform-image {
+  width: 13%;
+  vertical-align: middle;
+  object-fit: cover;
 }
 
 #itemlist-searchform-input {
-  border-color: #C2C2C2;
   // border-top: 1px solid #C2C2C2;
   // border-left: 1px solid #C2C2C2;
-  border: 1px solid #C2C2C2;
-  border-radius: 10px;   
+  border: 0;
 }
+
+
 
 #itemlist-searchform-img {
   height: 10px;
