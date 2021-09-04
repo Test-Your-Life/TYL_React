@@ -1410,6 +1410,20 @@ ul.prediction-container {
   height: 24px;
 }
 
+.profile-img-box {
+  position: absolute;
+  top: 13px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.profile {
+  object-fit: cover;
+}
+
 * {
   font-family: "Noto Sans KR", sans-serif;
 }

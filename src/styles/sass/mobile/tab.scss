@@ -42,7 +42,22 @@
       background-color: #fff;
   }
 
-  .menu-item {
+.menu-item {
     width:30px;
     height: 24px;
+}
+
+.profile-img-box{
+    position: absolute;
+    top: 13px;
+    right: 14px;
+    width: 30px;
+    height: 30px; 
+    border-radius: 70%;
+    overflow:hidden;
+}
+
+.profile {
+    object-fit:cover;
+    
 }

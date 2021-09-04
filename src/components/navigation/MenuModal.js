@@ -16,7 +16,7 @@ const MenuModal = props => {
           </button>
         </header>
         <main>
-          <GoogleButton />
+          <GoogleButton closeModal={closeModal} />
         </main>
       </section>
     </div>
