@@ -24,18 +24,18 @@ const Predict = ({ info }) => {
           </div>
           <div id="prediction-title-text">더 나은 투자를 경험해보세요!</div>
           <div id="prediction-explain-text" style={{ marginTop: '2%' }}>
-            <span id="prediction-name-text">RF</span> 예측이란? 대표적인 앙상블 모델로서 베이스
-            모델로 의사결정트리를 사용한 모델입니다.
+            <span id="prediction-name-text">RF</span> 예측이란? 베이스 모델로 의사결정트리를 사용한
+            모델입니다.
           </div>
-          <div id="prediction-explain-text" style={{ marginBottom: '5%' }}>
+          <div id="prediction-explain-text" style={{ marginBottom: '8%' }}>
             <span id="prediction-name-text">XGBoost</span> 예측이란? Gradient Boosting 알고리즘을
             사용한 모델입니다.
           </div>
         </div>
         <div className="prediction-category-text">
-          <span style={{ marginRight: '13.5%' }}>평균</span>{' '}
-          <span style={{ marginRight: '9.5%' }}>RF</span>{' '}
-          <span style={{ marginRight: '11%' }}>XGBoost</span>
+          <span style={{ marginRight: '12%' }}>평균</span>{' '}
+          <span style={{ marginRight: '9%' }}>RF</span>{' '}
+          <span style={{ marginRight: '12.8%' }}>XGBoost</span>
         </div>
         {inputValue.length <= 0 ? (
           <PredictList info={info} />
