@@ -57,13 +57,13 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
                           : 'decrease'
                       }
                     >
-                      ({menu.percent.toFixed(1)}%)
+                      ({menu.percent.toFixed(2)}%)
                     </li>
                   </ul>
                 )}
               </div>
             </div>
-            <hr width="480px" color="#c4c4c4" noshade="true" style={{ marginTop: '0px' }} />
+            <hr width="90%" color="#c4c4c4" noshade="true" style={{ marginTop: '0px' }} />
             <div className="time">
               {todayTime.slice(0, 9)}
               <span>{todayTime.slice(9, 12)}</span>
@@ -106,7 +106,7 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
                 >
                   {menu.profit > 0 ? '+' : ''}
                   {menu.profit.toLocaleString('ko-KR')} (
-                  {((menu.profit / (menu.price * menu.quantity - menu.profit)) * 100).toFixed(1)}
+                  {((menu.profit / (menu.price * menu.quantity - menu.profit)) * 100).toFixed(2)}
                   %)
                 </li>
               </ul>

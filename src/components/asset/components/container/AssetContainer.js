@@ -6,19 +6,19 @@ import { checkValidity } from '../../../auth/userSlice';
 import AssetTotal from '../presentational/AssetTotal';
 import AssetGraph from '../presentational/AssetGraph';
 import AssetList from '../presentational/AssetList';
-import cash_icon from '../../../../styles/images/cash_icon.png';
-import stock_icon from '../../../../styles/images/stock_icon.png';
-import coin_icon from '../../../../styles/images/coin_icon.png';
+import cash_icon from '../../../../styles/images/cash_icon.svg';
+import stock_icon from '../../../../styles/images/stock_icon.svg';
+import coin_icon from '../../../../styles/images/coin_icon.svg';
+import { useMediaQuery } from 'react-responsive';
 
 const AssetConatiner = () => {
-  const todayTime = () => {
-    var today = new Date();
-    var month = ('0' + (today.getMonth() + 1)).slice(-2);
-    var day = ('0' + today.getDate()).slice(-2);
-    var dateString = month + '/' + day;
+  const isPc = useMediaQuery({
+    query: '(min-width: 481px)',
+  });
 
-    return dateString;
-  };
+  const isMobile = useMediaQuery({
+    query: '(max-width: 480px)',
+  });
 
   const validity = useSelector(checkValidity);
   const [asset, setAsset] = useState(0);
@@ -35,6 +35,8 @@ const AssetConatiner = () => {
   const [stockPercent, setStockPercent] = useState(0);
 
   const [history, setHistory] = useState([]);
+  const [inProgress, setInProgress] = useState(true);
+  const [data, setData] = useState([]);
 
   let match = useRouteMatch();
 
@@ -74,111 +76,86 @@ const AssetConatiner = () => {
 
     axios.get('asset/history').then(res => {
       setHistory(res.data.history);
+      setInProgress(false);
     });
   }, [validity]);
 
-  const data = [
-    {
-      title: '1-week',
-      id: 'TYL',
-      data: [
-        {
-          x: '08.31',
-          y: 1000000,
-        },
-        {
-          x: '09.01',
-          y: 898000,
-        },
-        {
-          x: '09.02',
-          y: 895620,
-        },
-        {
-          x: '09.03',
-          y: 973340,
-        },
-        {
-          x: '09.04',
-          y: 1012000,
-        },
-        {
-          x: '09.05',
-          y: 1400000,
-        },
-      ], //함수로 call해야겠다 {history1Week}
-    },
-    {
-      title: '1-month',
-      id: 'TYL',
-      data: [
-        {
-          x: '20.4',
-          y: 1000000,
-        },
-        {
-          x: '20.5',
-          y: 870000,
-        },
-        {
-          x: '20.6',
-          y: 1010000,
-        },
-        {
-          x: '20.7',
-          y: 1446000,
-        },
-      ],
-    },
-    // {
-    //   title: '3-month',
-    //   id: 'TYL',
-    //   data: [
-    //     {
-    //       x: '20.4',
-    //       y: 1000000,
-    //     },
-    //     {
-    //       x: '20.5',
-    //       y: 870000,
-    //     },
-    //     {
-    //       x: '20.6',
-    //       y: 1010000,
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: '6-month',
-    //   id: 'TYL',
-    //   data: [
-    //     {
-    //       x: '20.4',
-    //       y: 1000000,
-    //     },
-    //     {
-    //       x: '20.5',
-    //       y: 870000,
-    //     },
-    //     {
-    //       x: '20.6',
-    //       y: 1010000,
-    //     },
-    //     {
-    //       x: '20.7',
-    //       y: 946000,
-    //     },
-    //     {
-    //       x: '20.8',
-    //       y: 990420,
-    //     },
-    //     {
-    //       x: '20.9',
-    //       y: 1000000,
-    //     },
-    //   ],
-    // },
-  ];
+  useEffect(() => {
+    if (inProgress) return;
+    const data = [];
+    const totalObj = { title: 'total', id: 'TYL', data: [] };
+
+    history.map((menu, idx) => {
+      if (menu.hasOwnProperty('asset')) {
+        menu.y = menu.asset;
+        delete menu.asset;
+      }
+      if (menu.hasOwnProperty('date')) {
+        var date = new Date(menu.date);
+        var res = ('0' + (date.getMonth() + 1)).slice(-2) + '.' + ('0' + date.getDate()).slice(-2);
+        menu.x = res;
+        delete menu.date;
+      }
+      totalObj.data.push(menu);
+    });
+
+    data.push(totalObj);
+    data.push(
+      {
+        title: '1-month',
+        id: 'TYL',
+        data: [
+          {
+            x: '20.4',
+            y: 1000000,
+          },
+          {
+            x: '20.5',
+            y: 870000,
+          },
+          {
+            x: '20.6',
+            y: 1010000,
+          },
+          {
+            x: '20.7',
+            y: 1446000,
+          },
+          {
+            x: '20.8',
+            y: 795040,
+          },
+          {
+            x: '20.9',
+            y: 946000,
+          },
+        ],
+      },
+      {
+        title: '3-month',
+        id: 'TYL',
+        data: [
+          {
+            x: '20.4',
+            y: 256600,
+          },
+          {
+            x: '20.5',
+            y: 170000,
+          },
+          {
+            x: '20.6',
+            y: 210000,
+          },
+          {
+            x: '20.7',
+            y: 34460,
+          },
+        ],
+      },
+    );
+    setData(data);
+  }, [inProgress]);
 
   const AssetBox = [
     {
@@ -207,11 +184,12 @@ const AssetConatiner = () => {
     total: cash,
   };
 
+  if (inProgress) return <div></div>;
   return (
     <>
-      <AssetTotal asset={asset.toLocaleString('ko-KR')} />
-      <AssetGraph data={data} />
-      <AssetList AssetBox={AssetBox} CashBox={CashBox} match={match} />
+      <AssetTotal isPc={isPc} asset={asset.toLocaleString('ko-KR')} />
+      <AssetGraph isPc={isPc} data={data} />
+      <AssetList isPc={isPc} AssetBox={AssetBox} CashBox={CashBox} match={match} />
     </>
   );
 };
