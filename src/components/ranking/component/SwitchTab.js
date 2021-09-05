@@ -9,17 +9,17 @@ import EstateTab from './container/EstateTab';
 const RankingBox = ({ id, isPc }) => {
   function SelectedItem() {
     if (id == 'all') {
-      return <AllTab isPc={isPc}/>;
+      return <AllTab isPc={isPc} />;
     } else if (id == 'stock') {
-      return <StockTab isPc={isPc}/>;
+      return <StockTab isPc={isPc} />;
     } else if (id == 'coin') {
-      return <CoinTab isPc={isPc}/>;
+      return <CoinTab isPc={isPc} />;
     } else if (id == 'deposit') {
-      return <DepositTab isPc={isPc}/>;
+      return <DepositTab isPc={isPc} />;
     } else if (id == 'gold') {
-      return <GoldTab isPc={isPc}/>;
+      return <GoldTab isPc={isPc} />;
     } else {
-      return <EstateTab isPc={isPc}/>;
+      return <EstateTab isPc={isPc} />;
     }
   }
 

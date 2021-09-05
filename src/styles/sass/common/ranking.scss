@@ -1,10 +1,10 @@
 @import './color.scss';
 
 ul.category-container {
-    width: 100%;
+    width: 95%;
     display: inline-flex;
     justify-content: space-between;
-    padding: 3% 0% 3% 0%;
+    padding: 3% 2.5% 3% 2.5%;
     margin: 0% 0% 8px 0%;
     font-size: smaller;
     background-color: #fff;
@@ -26,6 +26,16 @@ ul.category-container#m {
     color: #6C6FC6;
     cursor: pointer;
 }
+
+#m.selected-category {
+    display:inline;
+    font-weight: normal;
+    background-color: #5673EB;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 11px;
+}
   
 .unselected-category {
     display: inline;
@@ -33,6 +43,14 @@ ul.category-container#m {
     font-weight: bold;
     color: #C2C2C2;
     cursor: pointer;
+}
+
+#m.unselected-category {
+    display:inline;
+    font-weight: normal;
+    color: #C2C2C2;
+    cursor: pointer;
+    font-size: 11px;
 }
 
 ul.ranking-container {
