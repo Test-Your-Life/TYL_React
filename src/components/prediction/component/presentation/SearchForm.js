@@ -12,7 +12,6 @@ const SearchForm = ({ onSubmit, onChangeInput, inputValue }) => {
           placeholder="검색어를 입력하세요"
           value={inputValue}
           onChange={onChangeInput}
-          //autoFocus
         ></input>
       </form>
     </>

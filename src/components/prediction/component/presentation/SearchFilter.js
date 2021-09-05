@@ -2,7 +2,6 @@ import React from 'react';
 
 const SearchFilter = ({ info, inputValue }) => {
   let newItems = info.filter(item => item.name.includes(inputValue));
-  let cnt = 0;
 
   if (newItems.length == 0) {
     return (
@@ -11,6 +10,7 @@ const SearchFilter = ({ info, inputValue }) => {
       </div>
     );
   }
+  
   return newItems.map((item, idx) => {
     //   if (idx < N_Scroll * 50) {
     //const positive = item.rate > 0 ? true : false;
