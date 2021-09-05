@@ -32,10 +32,10 @@ const Predict = ({ info }) => {
             사용한 모델입니다.
           </div>
         </div>
-        <div className="prediction-category-text">
-          <span style={{ marginRight: '12%' }}>평균</span>{' '}
-          <span style={{ marginRight: '9%' }}>RF</span>{' '}
-          <span style={{ marginRight: '12.8%' }}>XGBoost</span>
+        <div className="prediction-category-box">
+          <ul id="prediction-category-text1">평균</ul>
+          <ul id="prediction-category-text2">RF</ul>
+          <ul id="prediction-category-text3">XGBoost</ul>
         </div>
         {inputValue.length <= 0 ? (
           <PredictList info={info} />

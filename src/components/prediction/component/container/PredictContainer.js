@@ -17,7 +17,7 @@ const PredictContainer = () => {
   //   return <div></div>;
 
   const tmpPredict = [
-    { name: '삼성전자하나두울셋', average: '+6.9', rf: '+6.9', xgb: '+6.9' },
+    { name: '삼성전자', average: '+6.9', rf: '+6.9', xgb: '+6.9' },
     { name: '카카오', average: '+1.9', rf: '+1.9', xgb: '+1.9' },
     { name: '대한항공', average: '-0.9', rf: '-0.9', xgb: '-0.9' },
     { name: '대한전선', average: '+4.6', rf: '+4.6', xgb: '+4.6' },

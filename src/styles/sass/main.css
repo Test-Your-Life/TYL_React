@@ -1253,15 +1253,14 @@ ul.ranking-container {
 }
 
 .select-container {
-  width: 20%;
   float: left;
-  margin: 0.5% 0% 0% 4%;
-  padding: 1.5% 0% 1.5% 5%;
+  margin: 2% 0% 0% 4%;
+  padding: 1.5% 0% 1.5% 1.5%;
   border: 1px solid #c4c4c420;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
   font-size: small;
-  font-weight: bolder;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -1271,7 +1270,6 @@ ul.ranking-container {
 }
 
 .searchform-container {
-  float: right;
   padding: 0.5%;
   margin: 0% 4% 10% 0%;
   border: 1px solid #c4c4c420;
@@ -1282,7 +1280,6 @@ ul.ranking-container {
 .search-image {
   width: 13%;
   vertical-align: middle;
-  object-fit: cover;
 }
 
 .searchform-input {
@@ -1365,17 +1362,38 @@ ul.prediction-container {
   color: #5673EB;
 }
 
-.prediction-category-text {
-  width: 100%;
-  float: right;
-  text-align: right;
-  margin: 0% 0% 1.5% 0%;
-  font-weight: bolder;
+.prediction-category-box {
+  width: 70%;
+  display: flex;
+  margin-left: auto;
+  margin-bottom: 1%;
+  font-weight: 500;
   font-size: smaller;
 }
 
+#prediction-category-text1 {
+  width: 28%;
+  height: 3ex;
+  margin-left: 12%;
+  padding: 0;
+}
+
+#prediction-category-text2 {
+  width: 28%;
+  height: 3ex;
+  margin-left: 0%;
+  padding: 0;
+}
+
+#prediction-category-text3 {
+  width: 28%;
+  height: 3ex;
+  margin-left: 1%;
+  padding: 0;
+}
+
 .predict-box {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   margin-bottom: 0.3%;
@@ -1384,7 +1402,7 @@ ul.prediction-container {
 .predict-name-text {
   width: 28%;
   height: 3ex;
-  margin: 0% 0% 0% 11%;
+  margin: 0% 0% 0% 2%;
   padding: 2% 4% 2% 4%;
   font-weight: 500;
   font-size: smaller;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SearchFilter = ({ info, inputValue }) => {
-  let newItems = info.filter(item => item.name.includes(inputValue));
+  let newItems = info.filter((item, idx) => item.name.includes(inputValue));
 
   function ProfitColor({ name }) {
     if (name > 0) {
@@ -24,12 +24,13 @@ const SearchFilter = ({ info, inputValue }) => {
   return newItems.map((item, idx) => {
     //   if (idx < N_Scroll * 50) {
     //const positive = item.rate > 0 ? true : false;
+    console.log(info);
     return (
       <div className="predict-box">
       <ul
         className="predict-name-text"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         {item.name}
@@ -37,7 +38,7 @@ const SearchFilter = ({ info, inputValue }) => {
       <ul
         className="predict-listbox"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         <ProfitColor name={item.average} />
@@ -45,7 +46,7 @@ const SearchFilter = ({ info, inputValue }) => {
       <ul
         className="predict-listbox"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         <ProfitColor name={item.rf} />
@@ -53,7 +54,7 @@ const SearchFilter = ({ info, inputValue }) => {
       <ul
         className="predict-listbox"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         <ProfitColor name={item.xgb} />

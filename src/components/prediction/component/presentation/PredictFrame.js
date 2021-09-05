@@ -18,7 +18,7 @@ const PredictFrame = ({ info }) => {
       <ul
         className="predict-name-text"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         {name}
@@ -26,7 +26,7 @@ const PredictFrame = ({ info }) => {
       <ul
         className="predict-listbox"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         <ProfitColor name={average} />
@@ -34,7 +34,7 @@ const PredictFrame = ({ info }) => {
       <ul
         className="predict-listbox"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         <ProfitColor name={rf} />
@@ -42,7 +42,7 @@ const PredictFrame = ({ info }) => {
       <ul
         className="predict-listbox"
         style={
-          info.order % 2 == 0 ? { backgroundColor: '#fafafa' } : { backgroundColor: '#e1e1e185' }
+          info.order % 2 != 0 ? { backgroundColor: '#e1e1e185' } : { backgroundColor: '#fafafa' }
         }
       >
         <ProfitColor name={xgb} />
