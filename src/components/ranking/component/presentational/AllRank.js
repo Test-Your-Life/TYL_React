@@ -3,7 +3,7 @@ import search_img from '../../../../styles/images/search_icon.png';
 import RankList from './RankList';
 import SearchFilter from './SearchFilter';
 
-const AllRank = ({ ainfo, yinfo, props }) => {
+const AllRank = ({ ainfo, yinfo, props, isPc }) => {
   const [selected, setSelected] = useState('total-asset');
   const [inputValue, setInputValue] = useState('');
 
@@ -70,7 +70,7 @@ const AllRank = ({ ainfo, yinfo, props }) => {
 
   return (
     <>
-      <ul className="ranking-container">
+      <ul className="ranking-container" id={isPc ? null : 'm'}>
         <div>{SelectTag}</div>
         <div>{SearchForm}</div>
         <div>{inputValue.length <= 0 ? <Inquiries /> : <InquiriesSearchFilter />}</div>

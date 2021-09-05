@@ -1,7 +1,15 @@
 import React from 'react';
 import Predict from '../presentation/Predict';
+import { useMediaQuery } from 'react-responsive';
 
 const PredictContainer = () => {
+  const isPc = useMediaQuery({
+    query: '(min-width: 481px)',
+  });
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 480px)',
+  });
   // const [inProgress, setInProgress] = useState(true);
   // const [predict, setPredict] = useState([]);
 
@@ -32,7 +40,7 @@ const PredictContainer = () => {
 
   return (
     <>
-      <Predict info={tmpPredict} />
+      <Predict info={tmpPredict} isPc={isPc} />
     </>
   );
 };

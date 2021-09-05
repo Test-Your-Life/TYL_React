@@ -735,11 +735,15 @@ ul.home-tickerbox {
   width: 100%;
   display: block;
   padding: 0%;
-  margin: 0% 0% 7% 0%;
+  margin: 0% 0% 8px 0%;
   background-color: #fff;
   border: 1px solid #c4c4c420;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+ul.home-tickerbox#m {
+  border-radius: 0px;
 }
 
 .home-small-info-text {
@@ -803,7 +807,7 @@ ul.home-tickerbox {
     padding-top: 7%;
   }
 }
-ul.home-rankbox {
+.home-rankbox {
   width: 100%;
   padding: 0;
   margin: 0;
@@ -811,6 +815,10 @@ ul.home-rankbox {
   border: 1px solid #c4c4c420;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+ul.home-rankbox#m {
+  border-radius: 0px;
 }
 
 .home-rankbox-title-text {
@@ -1325,12 +1333,16 @@ ul.category-container {
   display: inline-flex;
   justify-content: space-between;
   padding: 3% 0% 3% 0%;
-  margin: 0% 0% 7% 0%;
+  margin: 0% 0% 8px 0%;
   font-size: smaller;
   background-color: #fff;
   border: 1px solid #c4c4c420;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+ul.category-container#m {
+  border-radius: 0px;
 }
 
 .selected-category {
@@ -1354,11 +1366,15 @@ ul.category-container {
 ul.ranking-container {
   width: 100%;
   padding: 3% 0% 3% 0%;
-  margin: 0% 0% 7% 0%;
+  margin: 0;
   background-color: #fff;
   border: 1px solid #c4c4c420;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+ul.ranking-container#m {
+  border-radius: 0px;
 }
 
 .select-container {
@@ -1421,6 +1437,10 @@ ul.prediction-container {
   border: 1px solid #c4c4c420;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
+}
+
+ul.prediction-container#m {
+  border-radius: 0px;
 }
 
 .searchform-container {

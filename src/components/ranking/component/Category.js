@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import SwitchTab from './SwitchTab';
 
 const Category = () => {
+  const isPc = useMediaQuery({
+    query: '(min-width: 481px)',
+  });
+
+  const isMobile = useMediaQuery({
+    query: '(max-width: 480px)',
+  });
+
   const [selected, setSelected] = useState('all');
 
   const onClick = e => {
@@ -10,7 +19,7 @@ const Category = () => {
 
   return (
     <>
-      <ul className="category-container">
+      <ul className="category-container" id={isPc ? null : 'm'}>
         <div
           className={selected == 'all' ? 'selected-category' : 'unselected-category'}
           id="all"
@@ -55,7 +64,7 @@ const Category = () => {
         </div>
       </ul>
 
-      <SwitchTab id={selected} />
+      <SwitchTab id={selected} isPc={isPc} />
     </>
   );
 };

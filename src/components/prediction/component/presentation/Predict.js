@@ -3,7 +3,7 @@ import SearchForm from './SearchForm';
 import PredictList from './PredictList';
 import SearchFilter from './SearchFilter';
 
-const Predict = ({ info }) => {
+const Predict = ({ info, isPc }) => {
   const [inputValue, setInputValue] = useState('');
 
   const onSubmit = e => {
@@ -16,7 +16,7 @@ const Predict = ({ info }) => {
 
   return (
     <>
-      <ul className="prediction-container">
+      <ul className="prediction-container" id={isPc ? null : 'm'}>
         <SearchForm onSubmit={onSubmit} onChangeInput={onChangeInput} inputValue={inputValue} />
         <div className="prediction-textbox">
           <div id="prediction-title-text">

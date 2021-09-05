@@ -12,6 +12,10 @@ ul.prediction-container {
     box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.12);
 }
 
+ul.prediction-container#m {
+    border-radius: 0px;
+}
+
 .searchform-container {
     width: 42%;
     display: flex;
