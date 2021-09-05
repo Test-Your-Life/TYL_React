@@ -10,12 +10,12 @@
     box-sizing: border-box;
 }
 
-.tablet-content{
-    display:flex;
+.mobile-content{
+    position: relative;
+    top: 8vh;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 80%;
-    box-sizing: border-box;
-    border: 5px solid skyblue;
+    height:fit-content;
 }
