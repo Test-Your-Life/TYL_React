@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SearchFilter = ({ info, inputValue, str }) => {
-  let newItems = info.filter(item => item.nickname.includes(inputValue));
+  let newItems = info.filter((item, idx) => item.nickname.includes(inputValue));
 
   function Rank_123({ item }) {
     if (item.ranking == '1') {
@@ -28,7 +28,7 @@ const SearchFilter = ({ info, inputValue, str }) => {
     //const positive = item.rate > 0 ? true : false;
     return (
       <>
-        <ul className="ranking-list">
+        <ul className="ranking-list" key={idx}>
           <div className="list-text">
             <Rank_123 item={item} />
           </div>
