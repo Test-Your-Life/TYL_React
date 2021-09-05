@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import ChartStorage from './ChartStorage.js';
 import axios from 'axios';
 
 // https://apexcharts.com/docs/chart-types/candlestick/ 참고
@@ -8,6 +7,7 @@ import axios from 'axios';
 // 사용자가 커서에 항목을 클릭하지 않고 가리키면 조그마한 상자가 항목 위에 나타나서 보충 설명을 보여 준다.
 const Chart = props => {
   const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  const [category, setCategory] = useState('stock');
   const [series, setSeries] = useState([{}]);
   const [selectedItem, setSelectedItem] = useState();
   const [additionalData, setAdditionalData] = useState();
@@ -20,81 +20,95 @@ const Chart = props => {
     date: '',
   });
 
-  let newArr = { open: '', high: '', low: '', close: '', date: '' };
+  useEffect(() => {
+    if (props.category == 'stock') {
+      setCategory('stock');
+    } else if (props.category == 'coin') {
+      setCategory('coin');
+    } else {
+    }
+  }, [props.category]);
 
-  additionalData;
+  let newArr = { open: '', high: '', low: '', close: '', date: '' };
 
   useEffect(() => {
     setSelectedItem(props.sendItem);
   }, [props]);
 
   useEffect(() => {
+    console.log('찐막:', category);
     if (selectedItem != null) {
       setOptions({
         ...options,
         title: { text: selectedItem.name },
       });
+      let url;
+      if (category == 'stock') {
+        url = 'stock/candle-data?code=' + String(selectedItem.code);
+      } else if (category == 'coin') {
+        url = '/api/coin/candle-data?code=' + String(selectedItem.code);
+      }
+      console.log('마지막이다 ==>', selectedItem);
+      if (url != null) {
+        axios.get(url).then(res => {
+          console.log('뭐냐 ===> ', res.data.candleData);
 
-      let url = 'stock/history-data?code=' + String(selectedItem.code);
-      axios.get(url).then(res => {
-        console.log('뭐냐 ===> ', res.data.history);
+          if (res.data.candleData.length != 0) {
+            setTooltipData({
+              open: res.data.candleData[res.data.candleData.length - 1].startValue,
+              high: res.data.candleData[res.data.candleData.length - 1].highValue,
+              low: res.data.candleData[res.data.candleData.length - 1].lowValue,
+              close: res.data.candleData[res.data.candleData.length - 1].endValue,
+              date: res.data.candleData[res.data.candleData.length - 1].date,
+              idx: res.data.candleData.length - 1,
+            });
 
-        if (res.data.history.length != 0) {
-          setTooltipData({
-            open: res.data.history[res.data.history.length - 1].startValue,
-            high: res.data.history[res.data.history.length - 1].highValue,
-            low: res.data.history[res.data.history.length - 1].lowValue,
-            close: res.data.history[res.data.history.length - 1].endValue,
-            date: res.data.history[res.data.history.length - 1].date,
-          });
+            setAdditionalData(
+              res.data.candleData.map((res_data, index) => {
+                let className = 'chartInfo-data';
+                if (res_data.rate > 0) {
+                  className = 'chartInfo-increased';
+                } else if (res_data.rate < 0) {
+                  className = 'chartInfo-decreased';
+                }
 
-          setAdditionalData(
-            res.data.history.map((res_data, index) => {
-              let className = 'chartInfo-data';
-              if (res_data.rate > 0) {
-                className = 'chartInfo-increased';
-              } else if (res_data.rate < 0) {
-                className = 'chartInfo-decreased';
-              }
-
-              return {
-                tradeAmount: res_data.tradeAmount,
-                rate: res_data.rate,
-                className: className,
-              };
-            }),
-          );
-
-          setTooltipIndex(res.data.history.length - 1);
-
-          setSeries([
-            {
-              data: res.data.history.map((res_data, index) => {
                 return {
-                  x: res_data.date,
-                  y: [
-                    res_data.startValue,
-                    res_data.highValue,
-                    res_data.lowValue,
-                    res_data.endValue,
-                  ],
+                  tradeAmount: res_data.tradeAmount,
+                  rate: res_data.rate,
+                  className: className,
                 };
               }),
-            },
-          ]);
-        } else {
-          setSeries([{}]);
-          setAdditionalData();
-          setTooltipIndex(0);
-          setTooltipData({
-            open: '',
-            high: '',
-            low: '',
-            close: '',
-            date: '',
-          });
-        }
-      });
+            );
+            setTooltipIndex(res.data.candleData.length - 1);
+            setSeries([
+              {
+                data: res.data.candleData.map((res_data, index) => {
+                  return {
+                    x: res_data.date,
+                    y: [
+                      res_data.startValue,
+                      res_data.highValue,
+                      res_data.lowValue,
+                      res_data.endValue,
+                    ],
+                  };
+                }),
+              },
+            ]);
+          } else {
+            setSeries([{}]);
+            setAdditionalData();
+            setTooltipIndex(0);
+            setTooltipData({
+              open: '',
+              high: '',
+              low: '',
+              close: '',
+              date: '',
+            });
+          }
+        });
+      }
     }
   }, [selectedItem]);
 
@@ -165,7 +179,7 @@ const Chart = props => {
         newArr = { open: o, high: h, low: l, close: c, date: d };
 
         setTooltipIndex(dataPointIndex);
-        setTooltipData({ open: o, high: h, low: l, close: c, date: d });
+        setTooltipData({ open: o, high: h, low: l, close: c, date: d, idx: dataPointIndex });
         return '<div><div>';
       },
     },
