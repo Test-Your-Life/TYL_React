@@ -54,11 +54,15 @@ ul.home-tickerbox#m{
 .best-ticker-text-profit {
   width: 100%;
   font-weight: bolder;
-  color: $increasedrate;
+  color: $increase;
   animation: motion 0.5s;
 }
 
 .worst-ticker-text-name {
+  -webkit-user-select:none; 
+  -moz-user-select:none; 
+  -ms-user-select:none; 
+  user-select:none;
   width: 100%;
   font-weight: bolder;
   color: transparent; 
@@ -70,7 +74,7 @@ ul.home-tickerbox#m{
 .worst-ticker-text-profit {
   width: 100%;
   font-weight: bolder;
-  color: $decreasedrate;
+  color: $decrease;
   animation: motion 0.5s;
 }
 
