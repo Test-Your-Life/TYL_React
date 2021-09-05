@@ -6,7 +6,8 @@ const Modal = props => {
 
   // const [data, setdata] = useState();
   const [inputAmount, setValue] = useState('');
-  const [myAsset, setMyAsset] = useState('');
+  const [myCash, setMyCash] = useState();
+  const [myInvest, setMyInvest] = useState();
   const inputRef = useRef();
   const modalEl = useRef(); // modal Ref
   const btnEl = useRef(); // btn Ref
@@ -16,20 +17,19 @@ const Modal = props => {
     window.addEventListener('click', handleClickOutside);
     inputRef.current.focus();
 
-    if (modalData.trsType == 'buy') {
-      axios.get('asset').then(res => {
-        console.log('구매버튼 클릭 ==> ', res.data.cash.amount);
-        setMyAsset(res.data.cash.amount);
-      });
-    } else {
-      let url = 'stock/amount?code=' + String(modalData.code);
-      axios.get(url).then(res => {
-        //해야한다
-        console.log('판매버튼 클릭 ==> ', res.data.amount);
-      });
-    }
+    axios.get('asset').then(res => {
+      console.log('구매버튼 클릭 ==> ', res.data.cash.amount);
+      setMyCash(res.data.cash.amount);
+    });
+
+    let url = 'stock/amount?code=' + String(modalData.code);
+    axios.get(url).then(res => {
+      //해야한다
+      setMyInvest(res.data.amount);
+    });
 
     return () => {
+      console.log('myAssetmyAsset ==> ', modalData.trsType);
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
@@ -53,15 +53,26 @@ const Modal = props => {
 
   const onClicklabel = ({ target }) => {
     console.log('버튼 클릭=>', data.amount);
-    // 여기다 모달추가
-    axios.post('stock/transaction', data).then(res => {
-      console.log('onClickBtn => ', res.data);
-      closeModal({ open: true, text: res.data.message, data: modalData });
-    });
+
+    if (modalData.trsType == 'buy' && inputAmount * modalData.value > myCash) {
+    } else if (modalData.trsType == 'sell' && inputAmount > myInvest) {
+    } else {
+      axios.post('stock/transaction', data).then(res => {
+        console.log('onClickBtn => ', res.data);
+        closeModal({
+          open: true,
+          text: res.data.message,
+          data: modalData,
+          inputAmount: inputAmount,
+          myAsset: { myCash: myCash, myInvest: myInvest },
+        });
+      });
+    }
   };
 
   const onChangeInput = e => {
     setValue(e.target.value);
+    console.log('myAssetmyAsset==> ', myCash, myInvest);
   };
 
   return (
@@ -98,7 +109,9 @@ const Modal = props => {
                 {modalData.trsType == 'buy' ? '보유자산' : '보유수량'}
               </div>
               <div className="modal-item-myinfo">
-                {parseInt(myAsset).toLocaleString('ko-KR')}
+                {modalData.trsType == 'buy'
+                  ? parseInt(myCash).toLocaleString('ko-KR')
+                  : parseInt(myInvest).toLocaleString('ko-KR')}
                 {modalData.trsType == 'buy' ? ' TYL' : ' 주'}
               </div>
             </div>
@@ -133,7 +146,13 @@ const Modal = props => {
               </div>
             </div>
             <div id="trade-error">
-              {inputAmount * modalData.value > myAsset ? '보유자산이 부족합니다.' : null}
+              {modalData.trsType == 'buy'
+                ? inputAmount * modalData.value > myCash
+                  ? '보유자산이 부족합니다.'
+                  : null
+                : inputAmount > myInvest
+                ? '보유수량이 부족합니다.'
+                : null}
               &nbsp;&nbsp;
             </div>
           </div>

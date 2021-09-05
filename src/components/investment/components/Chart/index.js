@@ -47,23 +47,6 @@ const Chart = props => {
             close: res.data.history[res.data.history.length - 1].endValue,
             date: res.data.history[res.data.history.length - 1].date,
           });
-          setTooltipIndex(res.data.history.length - 1);
-
-          setSeries([
-            {
-              data: res.data.history.map((res_data, index) => {
-                return {
-                  x: res_data.date,
-                  y: [
-                    res_data.startValue,
-                    res_data.highValue,
-                    res_data.lowValue,
-                    res_data.endValue,
-                  ],
-                };
-              }),
-            },
-          ]);
 
           setAdditionalData(
             res.data.history.map((res_data, index) => {
@@ -81,6 +64,24 @@ const Chart = props => {
               };
             }),
           );
+
+          setTooltipIndex(res.data.history.length - 1);
+
+          setSeries([
+            {
+              data: res.data.history.map((res_data, index) => {
+                return {
+                  x: res_data.date,
+                  y: [
+                    res_data.startValue,
+                    res_data.highValue,
+                    res_data.lowValue,
+                    res_data.endValue,
+                  ],
+                };
+              }),
+            },
+          ]);
         } else {
           setSeries([{}]);
           setAdditionalData();

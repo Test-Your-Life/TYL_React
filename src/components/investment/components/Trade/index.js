@@ -61,7 +61,13 @@ const Trade = props => {
         <Modal closeModal={closeModal} modalData={modalData} getMessage={getMessage}></Modal>
       ) : null}
       {message.open ? (
-        <Message text={message.text} data={message.data} closeMessage={closeMessage}></Message>
+        <Message
+          text={message.text}
+          data={message.data}
+          inputAmount={message.inputAmount}
+          closeMessage={closeMessage}
+          myAsset={message.myAsset}
+        ></Message>
       ) : null}
     </>
   );

@@ -332,7 +332,7 @@ div#empty-space {
   width: 90%;
   max-width: 450px;
   margin:0 auto;
-  border-radius: .3rem;
+  border-radius: 25px;
   background-color: #fff;
   animation: trade-modal-show .3s;
   overflow: hidden;
@@ -341,6 +341,7 @@ div#empty-space {
 
 .trade-modal.trade-openModal {
   display: flex;
+  border-radius: .3rem;
   align-items: center;
   animation: trade-modal-bg-show .3s;
 }
