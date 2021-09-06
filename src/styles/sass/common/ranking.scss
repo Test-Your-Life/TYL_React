@@ -5,7 +5,7 @@ ul.category-container {
     display: inline-flex;
     justify-content: space-between;
     padding: 3% 2.5% 3% 2.5%;
-    margin: 0% 0% 8px 0%;
+    margin: 0% 0% 5% 0%;
     font-size: smaller;
     background-color: #fff;
     border: 1px solid #c4c4c420;
@@ -15,6 +15,7 @@ ul.category-container {
 
 ul.category-container#m {
     border-radius: 0px;
+    margin-bottom: 8px;
 }
 
 .selected-category {
