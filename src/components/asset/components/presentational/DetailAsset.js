@@ -24,7 +24,6 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
   };
 
   useEffect(() => {
-    console.log('assetbox', AssetBox);
     const assets = TotalAssetBox.map((menu, idx) => {
       if (menu.title === assetName && menu.total > 0) {
         return (

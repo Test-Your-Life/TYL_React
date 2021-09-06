@@ -119,7 +119,6 @@ const Modal = props => {
   const [N_Scroll, setN_Scroll] = useState(1);
 
   const onScroll = e => {
-    console.log('onScroll', e);
     const scrollHeight = e.target.scrollHeight;
     const scrollTop = e.target.scrollTop;
     const clientHeight = e.target.clientHeight;
