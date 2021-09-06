@@ -19,11 +19,9 @@ const ItemStorage = props => {
 
   useEffect(() => {
     if (props.category == 'stock') {
-      console.log('category!!!!!!!!!!!!!!', props.category);
       setCategory('stock');
       setSelected();
     } else if (props.category == 'coin') {
-      console.log('category!!!!!!!!!!!!!!', props.category);
       setCategory('coin');
       setSelected();
     } else {
@@ -31,30 +29,28 @@ const ItemStorage = props => {
   }, [props.category]);
 
   useEffect(() => {
+    console.log('category 바뀌었다 ==> '.category);
     getItem();
   }, [category]);
 
   const getItem = () => {
+    console.log('getItem함수실행 category ==> ', category);
+    console.log('getItem함수실행 cnt ==> ', cnt);
     if (category == 'coin') {
-      console.log('coin함수실행', props.category);
-
       axios.get('/api/coin/real-data').then(res => {
         if (selected == null) {
           props.getItem(res.data[0]);
         }
-        console.log('ㄹㅇㄹㅇ', props.category);
         let newArr = res.data.map((item, i) => {
           return { ...item, rate: ((item.endValue - item.startValue) / item.startValue) * 100 };
         });
         setItem(newArr);
       });
     } else if (category == 'stock' || cnt == 0) {
-      console.log('stock함수실행', props.category);
       axios.get('/stock/real-data').then(res => {
         if (selected == null) {
           props.getItem(res.data[0]);
         }
-        console.log(res.data);
         let newArr = res.data.map((item, i) => {
           return { item };
         });
