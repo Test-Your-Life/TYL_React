@@ -11,7 +11,6 @@ const Chart = props => {
   const [series, setSeries] = useState([{}]);
   const [selectedItem, setSelectedItem] = useState();
   const [additionalData, setAdditionalData] = useState();
-  const [tooltipIndex, setTooltipIndex] = useState(0);
   const [tooltipData, setTooltipData] = useState({
     open: '',
     high: '',
@@ -20,20 +19,26 @@ const Chart = props => {
     date: '',
   });
 
+  var category_idx = 1;
+
   useEffect(() => {
     if (props.category == 'stock') {
       setCategory('stock');
+      category_idx = 1;
     } else if (props.category == 'coin') {
       setCategory('coin');
-    } else {
+      category_idx = 2;
     }
   }, [props.category]);
+
+  useEffect(() => {}, [additionalData]);
 
   let newArr = { open: '', high: '', low: '', close: '', date: '' };
 
   useEffect(() => {
+    setAdditionalData();
     setSelectedItem(props.sendItem);
-  }, [props]);
+  }, [props.sendItem]);
 
   useEffect(() => {
     console.log('찐막:', category);
@@ -51,7 +56,7 @@ const Chart = props => {
       console.log('마지막이다 ==>', selectedItem);
       if (url != null) {
         axios.get(url).then(res => {
-          console.log('뭐냐 ===> ', res.data.candleData);
+          console.log('뭐냐 ===> ', res.data.candleData.length);
 
           if (res.data.candleData.length != 0) {
             setTooltipData({
@@ -79,7 +84,7 @@ const Chart = props => {
                 };
               }),
             );
-            setTooltipIndex(res.data.candleData.length - 1);
+
             setSeries([
               {
                 data: res.data.candleData.map((res_data, index) => {
@@ -95,17 +100,7 @@ const Chart = props => {
                 }),
               },
             ]);
-          } else {
-            setSeries([{}]);
-            setAdditionalData();
-            setTooltipIndex(0);
-            setTooltipData({
-              open: '',
-              high: '',
-              low: '',
-              close: '',
-              date: '',
-            });
+            console.log('additionalData', additionalData);
           }
         });
       }
@@ -178,7 +173,6 @@ const Chart = props => {
         const d = w.globals.categoryLabels[dataPointIndex];
         newArr = { open: o, high: h, low: l, close: c, date: d };
 
-        setTooltipIndex(dataPointIndex);
         setTooltipData({ open: o, high: h, low: l, close: c, date: d, idx: dataPointIndex });
         return '<div><div>';
       },
@@ -208,22 +202,29 @@ const Chart = props => {
     return year + '.' + month + '.' + day;
   };
 
+  const onClick = e => {
+    console.log(additionalData);
+  };
   return (
     <div className="chart-container">
       <ReactApexChart options={options} series={series} type="candlestick" height={320} />
 
-      <div id="chartInfo-div">
+      <div id="chartInfo-div" onClick={onClick}>
         <div className="chartInfo-date">{getFormatDate(tooltipData.date)}</div>
 
         <div className="chartInfo">
           <div className="chartInfo-container">
             <div className="chartInfo-text">시작</div>
-            <div className="chartInfo-data">{tooltipData.open}</div>
+            <div className="chartInfo-data">
+              {parseInt(tooltipData.open).toLocaleString('ko-KR')}
+            </div>
           </div>
           <div className="chartInfo-container">
             {' '}
             <div className="chartInfo-text">마지막</div>
-            <div className="chartInfo-data">{tooltipData.high}</div>
+            <div className="chartInfo-data">
+              {parseInt(tooltipData.high).toLocaleString('ko-KR')}
+            </div>
           </div>
         </div>
 
@@ -231,12 +232,16 @@ const Chart = props => {
           <div className="chartInfo-container">
             {' '}
             <div className="chartInfo-text">최고</div>
-            <div className="chartInfo-data">{tooltipData.low}</div>
+            <div className="chartInfo-data">
+              {parseInt(tooltipData.low).toLocaleString('ko-KR')}
+            </div>
           </div>
           <div className="chartInfo-container">
             {' '}
             <div className="chartInfo-text">최저</div>
-            <div className="chartInfo-data">{tooltipData.close}</div>
+            <div className="chartInfo-data">
+              {parseInt(tooltipData.close).toLocaleString('ko-KR')}
+            </div>
           </div>
         </div>
 
@@ -245,7 +250,9 @@ const Chart = props => {
             {' '}
             <div className="chartInfo-text">거래량</div>
             <div className="chartInfo-data">
-              {additionalData != null ? additionalData[tooltipIndex].tradeAmount : null}
+              {additionalData != null
+                ? additionalData[tooltipData.idx].tradeAmount.toFixed(2)
+                : null}
             </div>
           </div>
           <div className="chartInfo-container">
@@ -253,10 +260,12 @@ const Chart = props => {
             <div className="chartInfo-text">등락률</div>
             <div
               className={
-                additionalData != null ? additionalData[tooltipIndex].className : 'chartInfo-data'
+                additionalData != null
+                  ? additionalData[tooltipData.idx].className
+                  : 'chartInfo-data'
               }
             >
-              {additionalData != null ? additionalData[tooltipIndex].rate : null}%
+              {additionalData != null ? additionalData[tooltipData.idx].rate.toFixed(2) : null}%
             </div>
           </div>
         </div>
