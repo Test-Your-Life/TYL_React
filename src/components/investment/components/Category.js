@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Category = props => {
   const [selected, setSelected] = useState('stock');
-
+  console.log('isPC', props.isPc);
   const onClick = e => {
     setSelected(e.target.id);
     console.log('[category]클릭발생', e.target.id);

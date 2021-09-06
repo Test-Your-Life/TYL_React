@@ -183,11 +183,21 @@ div#item-name {
   width: 20%;
 }
 
-div#item-price {
+div.item-box {
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ padding: auto;
+ margin: auto;
+}
+
+span#item-price {
+  font-size: 1rem;
   padding: auto;
   margin: auto;
-  padding-left:10%;
-  white-space:nowrap;
+  // padding-left:8%;
+  // white-space:nowrap;
 }
 
 div#item-changed {
@@ -196,12 +206,13 @@ div#item-changed {
   padding-left:5%;
   display: flex;
   flex-direction: column;
-  font-size:medium;
+  font-size:0.8rem;
 }
 
-// div#item-changedprice, #item-changedpercent {
-//   color: $increasedrate;
-// }
+div#item-changedprice {
+  font-size: 1rem;
+  color: $increasedrate;
+}
 
 img.item {
   width: 100%;
@@ -236,23 +247,23 @@ div.chartInfo-container{
 }
 
 div.chartInfo-text{
-  width: 50%;
+  width:fit-content;
   text-align: left;
 }
 
 div.chartInfo-data{
-  width: 50%;
+  flex: 1;
   text-align: right;
 }
 
 div.chartInfo-increased{
-  width: 50%;
+  flex: 1;
   text-align: right;
   color: #EB5374;
 }
 
 div.chartInfo-decreased{
-  width: 50%;
+  flex: 1;
   text-align: right;
   color: #5673EB;
 }

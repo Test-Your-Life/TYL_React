@@ -112,8 +112,11 @@ const ItemStorage = props => {
               <p className="item">{item.name}</p>
             </div>
 
-            <div className="item" id="item-price">
-              {parseInt(item.value).toLocaleString('ko-KR')} TYL
+            <div className="item-box">
+              <span className="item" id="item-price">
+                {parseInt(item.value).toLocaleString('ko-KR')}
+              </span>
+              <span>&nbsp; TYL</span>
             </div>
 
             <div className="item" id="item-changed">
@@ -130,7 +133,7 @@ const ItemStorage = props => {
                 id="item-changedpercent"
                 style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}
               >
-                ({item.rate.toFixed(5)}%)
+                ({item.rate.toFixed(2)}%)
               </div>
             </div>
           </div>
@@ -166,8 +169,11 @@ const ItemStorage = props => {
               <p className="item">{item.name}</p>
             </div>
 
-            <div className="item" id="item-price">
-              {parseInt(item.value).toLocaleString('ko-KR')} TYL
+            <div className="item-box">
+              <span className="item" id="item-price">
+                {parseInt(item.value).toLocaleString('ko-KR')}
+              </span>
+              <span>&nbsp; TYL</span>
             </div>
 
             <div className="item" id="item-changed">
