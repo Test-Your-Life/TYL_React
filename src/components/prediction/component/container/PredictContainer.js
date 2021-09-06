@@ -40,6 +40,7 @@ const PredictContainer = () => {
   rfPredict.sort(function (a, b) {
     return parseFloat(a.code) - parseFloat(b.code);
   });
+  
   xgbPredict.sort(function (a, b) {
     return parseFloat(a.code) - parseFloat(b.code);
   });
