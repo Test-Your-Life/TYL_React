@@ -1576,6 +1576,7 @@ ul.prediction-container {
 
 ul.prediction-container#m {
   border-radius: 0px;
+  width: 100%;
 }
 
 .searchform-container {
@@ -1600,8 +1601,9 @@ ul.prediction-container#m {
 }
 
 .prediction-textbox {
-  width: 100%;
-  margin: 0% 0% 0% 5%;
+  width: 85%;
+  margin-left: 5%;
+  padding-left: 0%;
   float: left;
   text-align: left;
 }
@@ -1677,7 +1679,7 @@ ul.prediction-container#m {
 .predict-listbox {
   width: 10%;
   margin: 0% 0% 0% 0.5%;
-  padding: 2.2% 4.5% 2% 5%;
+  padding: 2.2% 4.8% 2% 5%;
   font-weight: bolder;
   font-size: smaller;
   background-color: #fafafa;

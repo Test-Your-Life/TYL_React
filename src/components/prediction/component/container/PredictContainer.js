@@ -75,7 +75,6 @@ const PredictContainer = () => {
   for (let i = 0; i < rfPredict.length; i++) {
     newObj[i].order = i + 1;
   }
-  console.log(newObj);
 
   return (
     <>
