@@ -21,7 +21,6 @@ const Modal = props => {
   useEffect(() => {
     window.addEventListener('click', handleClickOutside);
     inputRef.current.focus();
-    console.log(modalData);
 
     axios.get('asset').then(res => {
       setMyCash(res.data.cash.amount);
@@ -56,8 +55,6 @@ const Modal = props => {
   };
 
   const onClicklabel = ({ target }) => {
-    console.log('또니?', data.assetType);
-
     if (modalData.trsType == 'buy' && inputAmount * modalData.value > myCash) {
     } else if (modalData.trsType == 'sell' && inputAmount > myInvest) {
     } else if (inputAmount != null && inputAmount != 0) {
@@ -69,7 +66,6 @@ const Modal = props => {
       }
 
       axios.post(url, data).then(res => {
-        console.log('onClickBtn => ', res.data);
         closeModal({
           open: true,
           text: res.data.message,
@@ -83,7 +79,6 @@ const Modal = props => {
 
   const onChangeInput = e => {
     setValue(e.target.value);
-    console.log('myAssetmyAsset==> ', myCash, category);
   };
 
   return (
@@ -147,7 +142,7 @@ const Modal = props => {
                 onChange={onChangeInput}
                 placeholder="수량을 입력하세요"
               ></input>
-              <div>주</div>
+              <span id="modal-unit">{category === 'stock' ? '주' : '개'}</span>
             </div>
 
             <div className="modal-item-info" id="modal-item-info-custom">

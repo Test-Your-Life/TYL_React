@@ -47,11 +47,6 @@ const ItemStorage = props => {
     }
   }, [category]);
 
-  useEffect(() => {
-    console.log('category 바뀌었다 ==> ', category);
-    // getItem();
-  }, [category]);
-
   const getItem = () => {
     axios.get('/api/coin/real-data').then(res => {
       setCoin(

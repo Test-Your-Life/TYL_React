@@ -89,7 +89,9 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
                 <li className="name" style={{ fontSize: '13px' }}>
                   {menu.name}
                 </li>
-                <li style={{ fontSize: '12px', color: '#747474' }}>{menu.quantity}주</li>
+                <li style={{ fontSize: '12px', color: '#747474' }}>
+                  {`${menu.quantity} ${menu.title === '주식' ? '주' : '개'}`}
+                </li>
               </ul>
               <ul className="asset-tabs-right">
                 <li style={{ fontSize: '14px' }}>
