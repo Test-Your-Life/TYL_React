@@ -127,7 +127,7 @@ const ItemStorage = props => {
                 id="item-changedpercent"
                 style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}
               >
-                {/* ({item.rate.toFixed(2)}%) */}
+                ({item.rate.toFixed(5)}%)
               </div>
             </div>
           </div>
