@@ -101,8 +101,11 @@ const ItemStorage = props => {
               onClick(item, item.name, item.value);
             }}
           >
-            <div className="item" id="item-img">
-              {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
+            <div className="item" className="item-img-box">
+              <img
+                className="item-img"
+                src={`https://testyourlife.kro.kr/api/image/stock/${item.code}_logo`}
+              />
             </div>
 
             <div className="item" id="item-name">
@@ -127,7 +130,7 @@ const ItemStorage = props => {
                 id="item-changedpercent"
                 style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}
               >
-                ({item.rate.toFixed(2)}%)
+                ({item.rate.toFixed(5)}%)
               </div>
             </div>
           </div>
@@ -150,8 +153,13 @@ const ItemStorage = props => {
               onClick(item, item.name, item.value);
             }}
           >
-            <div className="item" id="item-img">
-              {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
+            <div className="item">
+              <div className="item-img-box">
+                <img
+                  className="item-img"
+                  src={`https://testyourlife.kro.kr/api/image/stock/${item.code}_logo`}
+                />
+              </div>
             </div>
 
             <div className="item" id="item-name">

@@ -4,8 +4,13 @@ import ItemList from './components/ItemList/index.js';
 import Chart from './components/Chart/index.js';
 import Prediction from './components/Prediction/index.js';
 import Trade from './components/Trade/index.js';
+import { useMediaQuery } from 'react-responsive';
 
 const index = () => {
+  const isPc = useMediaQuery({
+    query: '(min-width: 481px)',
+  });
+
   const [selectedItem, setSelectedItem] = useState();
   const [category, setCategory] = useState('stock');
   const [hide, setHide] = useState(false);
