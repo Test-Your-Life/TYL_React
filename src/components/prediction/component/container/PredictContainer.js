@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Predict from '../presentation/Predict';
 import { useMediaQuery } from 'react-responsive';
+import Predict from '../presentation/Predict';
 
 const PredictContainer = () => {
   const isPc = useMediaQuery({
