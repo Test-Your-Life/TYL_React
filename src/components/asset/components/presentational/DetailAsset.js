@@ -136,7 +136,12 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
           <div>{detailList}</div>
         )}
       </div>
-      <Modal open={modalOpen} close={closeModal} header={modalData.header}></Modal>
+      <Modal
+        open={modalOpen}
+        close={closeModal}
+        header={modalData.header}
+        assetName={assetName}
+      ></Modal>
     </div>
   );
 };
