@@ -37,17 +37,33 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
                 </ul>
                 {menu.link === 'cash' ? null : (
                   <ul className="asset-tabs-right">
-                    <li className={menu.today === '+' ? 'increase' : 'decrease'}>
+                    <li
+                      className={
+                        menu.today === '+'
+                          ? 'increase'
+                          : menu.today === ''
+                          ? 'maintain'
+                          : 'decrease'
+                      }
+                    >
                       {menu.today === '+' ? '+' : ''} {menu.value.toLocaleString('ko-KR')}
                     </li>
-                    <li className={menu.today === '+' ? 'increase' : 'decrease'}>
-                      ({menu.percent.toFixed(1)}%)
+                    <li
+                      className={
+                        menu.today === '+'
+                          ? 'increase'
+                          : menu.today === ''
+                          ? 'maintain'
+                          : 'decrease'
+                      }
+                    >
+                      ({menu.percent.toFixed(2)}%)
                     </li>
                   </ul>
                 )}
               </div>
             </div>
-            <hr width="480px" color="#c4c4c4" noshade="true" style={{ marginTop: '0px' }} />
+            <hr width="90%" color="#c4c4c4" noshade="true" style={{ marginTop: '0px' }} />
             <div className="time">
               {todayTime.slice(0, 9)}
               <span>{todayTime.slice(9, 12)}</span>
@@ -65,8 +81,8 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
           <li key={idx} id="detail-asset" className={idx} onClick={openModal}>
             <div className="asset-img-box">
               <img
-                className="profile"
-                src={'https://t1.daumcdn.net/cfile/tistory/997BD7335D089C3023'}
+                className="asset-img"
+                src={`https://testyourlife.kro.kr/api/image/stock/${menu.code}_logo`}
               />
             </div>
             <div className="gang">
@@ -88,7 +104,7 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
                 >
                   {menu.profit > 0 ? '+' : ''}
                   {menu.profit.toLocaleString('ko-KR')} (
-                  {((menu.profit / (menu.price * menu.quantity - menu.profit)) * 100).toFixed(1)}
+                  {((menu.profit / (menu.price * menu.quantity - menu.profit)) * 100).toFixed(2)}
                   %)
                 </li>
               </ul>
@@ -106,24 +122,20 @@ const DetailAsset = ({ todayTime, assetName, TotalAssetBox, AssetBox }) => {
     <div className="my-asset-container">
       <div id="asset" style={{ paddingBottom: '10px' }}>
         {totalAsset}
-        <div>
-          {detailList.length == 0 ? (
-            assetName === '암호화폐' ? (
+
+        {detailList.length == 0 ? (
+          <div>
+            {assetName === '암호화폐' ? (
               <h3>보유한 {assetName}가 없습니다.</h3>
             ) : (
               <h3>보유한 {assetName}이 없습니다.</h3>
-            )
-          ) : (
-            detailList
-          )}
-        </div>
+            )}
+          </div>
+        ) : (
+          <div>{detailList}</div>
+        )}
       </div>
-      <Modal
-        open={modalOpen}
-        close={closeModal}
-        onAccept={modalData.onAccept}
-        header={modalData.header}
-      ></Modal>
+      <Modal open={modalOpen} close={closeModal} header={modalData.header}></Modal>
     </div>
   );
 };

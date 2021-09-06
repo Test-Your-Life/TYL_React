@@ -3,6 +3,7 @@ import { Route, NavLink } from 'react-router-dom';
 import Home from '../home/index';
 import Investment from '../investment/index';
 import Ranking from '../ranking/index';
+import Prediction from '../prediction/index';
 import Asset from '../asset/index.js';
 import Profile from '../profile/index.js';
 import Auth from '../auth/index.js';
@@ -30,6 +31,7 @@ const Page = () => {
   const topMenuBox = [
     { link: '/', title: '홈' },
     { link: '/Investment', title: '투자' },
+    { link: '/Prediction', title: '예측' },
     { link: '/Ranking', title: '랭킹' },
   ];
 
@@ -46,7 +48,7 @@ const Page = () => {
       return (
         <li key={idx} className="user-profile">
           <div className="profile-img-box">
-            <img src={profile_img} className="profile" />
+            <img src={`https://testyourlife.kro.kr/api/image/profile?email=${user.email}`} />
           </div>
           <span className="user-name">{menu.title}</span>
           <span className="user-ment">님, 반가워요!</span>
@@ -73,6 +75,7 @@ const Page = () => {
       <div className="content">
         <Route path="/" component={Home} exact />
         <Route path="/Investment" component={Investment} />
+        <Route path="/Prediction" component={Prediction} />
         <Route path="/Ranking" component={Ranking} />
         <Route exact path="/Asset" component={Asset} />
         <Route path="/Profile" component={Profile} />

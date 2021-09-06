@@ -1,152 +1,207 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Trade from '../Trade/index.js';
-//https://search.pstatic.net/sunny/?src=https%3A%2F%…%2F_images%2Ffavicon.ico&type=f30_30_png_expire24 삼성이미지
-// 라이프 사이클,
-// useeffect 렌더링 전 , 후 표시?
-// 렌더링 되기 전 데이터를 받아와야 함
-const ItemStorage = (props) => {
 
-    //이름, 코드?(필요한가), 값, rate만 가져올 수 있도록한다.
-    const [items, setItem] = useState([]);
-    const [N_Scroll, setN_Scroll] = useState(1);
-    const [selectedItem, setSelectedItem] = useState({});
-    var cnt = 0;
+const ItemStorage = props => {
+  const [stock, setStock] = useState([]);
+  const [coin, setCoin] = useState([]);
+  const [N_Scroll, setN_Scroll] = useState(1);
+  const [selected, setSelected] = useState(false);
+  const [category, setCategory] = useState('stock');
+  var cnt = 0;
 
+  useEffect(() => {
+    axios.get('/api/coin/real-data').then(res => {
+      setCoin(
+        res.data.map((item, i) => {
+          return { ...item, rate: ((item.endValue - item.startValue) / item.startValue) * 100 };
+        }),
+      );
+    });
+    axios.get('/stock/real-data').then(res => {
+      props.getItem(res.data[0]);
+      setStock(res.data);
+    });
 
-    useEffect(() => {
-        // updateData() => setInterval 10초마다 장이열리는 시간이면 ㅋㅋ
-        getItem();
-        var interval = setInterval(getItem, 10000);
-        return () => {
-            console.log("I'm dying...");
-            clearInterval(interval);
-        };
-    }, []);
+    let interval = setInterval(getItem, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
-    // 유즈이펙트 나갈때 타이머 종료 실행
-    // 
-
-    useEffect(() => {
-        props.getItem(items[0]);
-    }, [items]);
-
-    const getItem = () => {
-        cnt += 1;
-        axios.get('/stock/real-data').then(res => {
-            console.log("데이터를 불러왔습니다. =>", cnt, res.data);
-
-            let newArr = res.data.map((item, i) => {
-                return { item };
-            });
-            setItem(res.data);
-        });
+  useEffect(() => {
+    if (props.category == 'stock') {
+      setCategory('stock');
+      setSelected(false);
+    } else if (props.category == 'coin') {
+      setCategory('coin');
+      setSelected(false);
     }
+  }, [props.category]);
 
-    useEffect(() => {
-        console.log("setItem 끝났습니다. items[0]=> ", items[0]);
-        props.getItem(items[0]);
-    }, [items]);
-
-    const fluctuationCal = (value, rate) => {
-        let prevValue = value / (1 + (rate / 100))
-        let result = value - prevValue
-
-        return Math.round(result / 10) * 10;
+  useEffect(() => {
+    if (category == 'stock') {
+      props.getItem(stock[0]);
+    } else if (category == 'coin') {
+      props.getItem(coin[0]);
     }
+  }, [category]);
 
-    const onScroll = (e) => {
-        const scrollHeight = e.target.scrollHeight;
-        const scrollTop = e.target.scrollTop;
-        const clientHeight = e.target.clientHeight;
-        if (scrollTop + clientHeight >= scrollHeight * 0.9) {
-            setN_Scroll(N_Scroll + 1)
-        }
+  useEffect(() => {
+    console.log('category 바뀌었다 ==> ', category);
+    // getItem();
+  }, [category]);
 
+  const getItem = () => {
+    axios.get('/api/coin/real-data').then(res => {
+      setCoin(
+        res.data.map((item, i) => {
+          return { ...item, rate: ((item.endValue - item.startValue) / item.startValue) * 100 };
+        }),
+      );
+    });
+    axios.get('/stock/real-data').then(res => {
+      setStock(res.data);
+    });
+  };
+
+  const fluctuationCal = (value, rate) => {
+    let prevValue = value / (1 + rate / 100);
+    let result = value - prevValue;
+
+    return Math.round(result / 10) * 10;
+  };
+
+  const onScroll = e => {
+    const scrollHeight = e.target.scrollHeight;
+    const scrollTop = e.target.scrollTop;
+    const clientHeight = e.target.clientHeight;
+    if (scrollTop + clientHeight >= scrollHeight * 0.9) {
+      setN_Scroll(N_Scroll + 1);
     }
+  };
 
-    const onClick = (item) => {
-        props.getItem(item);
-    }
+  const onClick = item => {
+    setSelected(true);
+    props.getItem(item);
+  };
 
-    const allResult = (items) => {
+  const allResult = items => {
+    cnt += 1;
 
+    return items.map((item, index) => {
+      if (index < N_Scroll * 50) {
+        const positive = item.rate > 0 ? true : false;
         return (
-            items.map((item, index) => {
-                if (index < N_Scroll * 50) {
+          <div
+            className="item"
+            id="item-container"
+            key={index}
+            onClick={() => {
+              onClick(item, item.name, item.value);
+            }}
+          >
+            <div className="item" className="item-img-box">
+              <img
+                className="item-img"
+                src={`https://testyourlife.kro.kr/api/image/stock/${item.code}_logo`}
+              />
+            </div>
 
-                    const positive = item.rate > 0 ? true : false
-                    return (
-                        < div className="item" id="item-container" key={item.id} onClick={() => { onClick(item, item.name, item.value); }}>
+            <div className="item" id="item-name">
+              <p className="item">{item.name}</p>
+            </div>
 
-                            <div className="item" id="item-img">
-                                {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
-                            </div>
+            <div className="item" id="item-price">
+              {parseInt(item.value).toLocaleString('ko-KR')} TYL
+            </div>
 
-                            <div className="item" id="item-name">
-                                <p className="item">{item.name}</p>
-                            </div>
-
-                            <div className="item" id="item-price">
-                                {parseInt(item.value).toLocaleString('ko-KR')} TYL
-                            </div>
-
-                            <div className="item" id="item-changed">
-                                <div id="item-changedprice" style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}>{positive > 0 ? "+" : ""}{parseInt(fluctuationCal(item.value, item.rate)).toLocaleString('ko-KR')}</div>
-                                <div id="item-changedpercent" style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}>({item.rate}%)</div>
-                            </div>
-
-
-                        </div>
-                    );
-                }
-            })
+            <div className="item" id="item-changed">
+              <div
+                id="item-changedprice"
+                style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}
+              >
+                {positive > 0 ? '+' : ''}
+                {category == 'stock'
+                  ? parseInt(fluctuationCal(item.value, item.rate)).toLocaleString('ko-KR')
+                  : parseInt(item.endValue - item.startValue).toLocaleString('ko-KR')}
+              </div>
+              <div
+                id="item-changedpercent"
+                style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}
+              >
+                ({item.rate.toFixed(5)}%)
+              </div>
+            </div>
+          </div>
         );
-    }
+      }
+    });
+  };
 
-    const filteredResult = (items) => {
-        let newItems = items.filter((item) => item.name.includes(props.inputValue));
+  const filteredResult = items => {
+    let newItems = items.filter(item => item.name.includes(props.inputValue));
+    return newItems.map((item, index) => {
+      if (index < N_Scroll * 50) {
+        const positive = item.rate > 0 ? true : false;
         return (
-            newItems.map((item, index) => {
-                if (index < N_Scroll * 50) {
+          <div
+            className="item"
+            id="item-container"
+            key={index}
+            onClick={() => {
+              onClick(item, item.name, item.value);
+            }}
+          >
+            <div className="item">
+              <div className="item-img-box">
+                <img
+                  className="item-img"
+                  src={`https://testyourlife.kro.kr/api/image/stock/${item.code}_logo`}
+                />
+              </div>
+            </div>
 
-                    const positive = item.rate > 0 ? true : false
-                    return (
-                        < div className="item" id="item-container" key={item.id} onClick={() => { onClick(item, item.name, item.value); }
-                        } >
+            <div className="item" id="item-name">
+              <p className="item">{item.name}</p>
+            </div>
 
-                            <div className="item" id="item-img">
-                                {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
-                            </div>
+            <div className="item" id="item-price">
+              {parseInt(item.value).toLocaleString('ko-KR')} TYL
+            </div>
 
-                            <div className="item" id="item-name">
-                                <p className="item">{item.name}</p>
-                            </div>
-
-                            <div className="item" id="item-price">
-                                {parseInt(item.value).toLocaleString('ko-KR')} TYL
-                            </div>
-
-                            <div className="item" id="item-changed">
-                                <div id="item-changedprice" style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}>{positive > 0 ? "+" : ""}{parseInt(fluctuationCal(item.value, item.rate)).toLocaleString('ko-KR')}</div>
-                                <div id="item-changedpercent" style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}>({item.rate}%)</div>
-                            </div>
-
-
-                        </div>
-                    );
-                }
-            })
+            <div className="item" id="item-changed">
+              <div
+                id="item-changedprice"
+                style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}
+              >
+                {positive > 0 ? '+' : ''}
+                {parseInt(fluctuationCal(item.value, item.rate)).toLocaleString('ko-KR')}
+              </div>
+              <div
+                id="item-changedpercent"
+                style={positive > 0 ? { color: '#EB5374' } : { color: '#5673EB' }}
+              >
+                ({item.rate.toFixed(2)}%)
+              </div>
+            </div>
+          </div>
         );
-    }
+      }
+    });
+  };
 
-
-    return (
-        <div id="items-container" onScroll={onScroll}>
-            {props.inputValue.length <= 0 ? allResult(items) : filteredResult(items)}
-        </div >
-    );
-
+  return (
+    <div id="items-container" onScroll={onScroll}>
+      {props.inputValue.length <= 0
+        ? category == 'stock'
+          ? allResult(stock)
+          : allResult(coin)
+        : category == 'stock'
+        ? filteredResult(stock)
+        : filteredResult(coin)}
+    </div>
+  );
 };
 
 export default ItemStorage;
