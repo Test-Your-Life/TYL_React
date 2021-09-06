@@ -29,7 +29,7 @@ const ItemStorage = props => {
   }, [props.category]);
 
   useEffect(() => {
-    console.log('category 바뀌었다 ==> '.category);
+    console.log('category 바뀌었다 ==> ', category);
     getItem();
   }, [category]);
 
