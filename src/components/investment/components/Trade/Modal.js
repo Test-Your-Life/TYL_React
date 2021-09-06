@@ -91,8 +91,11 @@ const Modal = props => {
       <div className="trade-openModal trade-modal">
         <section ref={modalEl}>
           <div className="modal-header-container">
-            <div className="modal-item-img">
-              {/* <img className="item" src={item.imageUrl} alt={item.name} /> */}
+            <div className="item" className="item-img-box">
+              <img
+                className="item-img"
+                src={`https://testyourlife.kro.kr/api/image/stock/${modalData.code}_logo`}
+              />
             </div>
 
             <div className="modal-name-Btn">
@@ -136,20 +139,15 @@ const Modal = props => {
                 {modalData.trsType == 'buy' ? '구매수량' : '판매수량'}
               </div>
 
-              <div className="modal-item-myinput">
-                <input
-                  id="modal-input"
-                  ref={inputRef}
-                  type="number"
-                  value={inputAmount}
-                  onChange={onChangeInput}
-                  placeholder="수량을 입력하세요"
-                ></input>
-              </div>
-              <div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {category == 'stock' ? '주' : modalData.code.slice(4, modalData.code.length)}
-              </div>
+              <input
+                id="modal-input"
+                ref={inputRef}
+                type="number"
+                value={inputAmount}
+                onChange={onChangeInput}
+                placeholder="수량을 입력하세요"
+              ></input>
+              <div>주</div>
             </div>
 
             <div className="modal-item-info" id="modal-item-info-custom">
